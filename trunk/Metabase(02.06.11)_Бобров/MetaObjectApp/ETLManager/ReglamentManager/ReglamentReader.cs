@@ -34,6 +34,13 @@ namespace ETLManager
 
             //Получаем элементы регламента. Смотрим какие из них по дате активации совпадают с текущим временем. Добавляем их в список
             //TODO
+            List<ReglamentElementMetaObject> regElMO = rmo.GetReglamentElements();
+
+            foreach (ReglamentElementMetaObject re in regElMO)
+            {
+                //jijio;
+            }
+
             return currentTasks;
         }
     }
