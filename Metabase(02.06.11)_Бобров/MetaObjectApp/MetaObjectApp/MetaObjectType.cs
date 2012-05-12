@@ -9,6 +9,7 @@ namespace MetaObjectApp
     {
         MetaObject,
         Cube,
-        DataSource
+        DataSource,
+        Reglament
     }
 }

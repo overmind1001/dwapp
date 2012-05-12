@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace MetaObjectApp
 {
-    class Attribute
+    public class Attribute
     {
         //Поля
         protected long id;
@@ -53,7 +53,7 @@ namespace MetaObjectApp
         {
             get
             {
-                return this.type;
+                return this.value;
             }
             set
             {
