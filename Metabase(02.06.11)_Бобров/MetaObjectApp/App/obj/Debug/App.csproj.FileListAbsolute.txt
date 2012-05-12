@@ -1,0 +1,7 @@
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\App\bin\Debug\App.exe
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\App\bin\Debug\App.pdb
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\App\obj\Debug\ResolveAssemblyReference.cache
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\App\obj\Debug\App.exe
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\App\obj\Debug\App.pdb
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\tmp\Metabase(02.06.11)_Бобров\MetaObjectApp\App\obj\Debug\App.exe
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\tmp\Metabase(02.06.11)_Бобров\MetaObjectApp\App\obj\Debug\App.pdb

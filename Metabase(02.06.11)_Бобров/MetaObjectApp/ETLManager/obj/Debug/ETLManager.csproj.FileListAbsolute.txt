@@ -1,0 +1,7 @@
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\ETLManager\bin\Debug\ETLManager.dll
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\ETLManager\bin\Debug\ETLManager.pdb
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\ETLManager\obj\Debug\ResolveAssemblyReference.cache
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\ETLManager\obj\Debug\ETLManager.dll
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\ETLManager\obj\Debug\ETLManager.pdb
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\ETLManager\bin\Debug\MetaObjectApp.dll
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\ETLManager\bin\Debug\MetaObjectApp.pdb

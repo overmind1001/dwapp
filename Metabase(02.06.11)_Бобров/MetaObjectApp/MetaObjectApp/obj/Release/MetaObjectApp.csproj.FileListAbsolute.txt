@@ -1,0 +1,12 @@
+C:\Users\1\Desktop\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\bin\Release\MetaObjectApp.exe
+C:\Users\1\Desktop\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\bin\Release\MetaObjectApp.pdb
+C:\Users\1\Desktop\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\obj\Release\ResolveAssemblyReference.cache
+C:\Users\1\Desktop\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\obj\Release\MetaObjectApp.exe
+C:\Users\1\Desktop\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\obj\Release\MetaObjectApp.pdb
+C:\Users\1\Desktop\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\bin\Release\MetaObjectApp.exe.config
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\obj\Release\MetaObjectApp.pdb
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\bin\Release\MetaObjectApp.pdb
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\obj\Release\ResolveAssemblyReference.cache
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\bin\Release\MetaObjectApp.dll.config
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\bin\Release\MetaObjectApp.dll
+D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\MetaObjectApp\obj\Release\MetaObjectApp.dll
