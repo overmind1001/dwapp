@@ -27,6 +27,15 @@ namespace MetaObjectApp
             this.changed = false;
             this.owner = owner;
         }
+        public Attribute(MetaObject owner, AttrNameType attrNameType)
+        {
+            this.id = 0;
+            this.name = attrNameType.Name;
+            this.type = attrNameType.Type;
+            this.value = "";
+            this.changed = false;
+            this.owner = owner;
+        }
         //Свойства
         string Name
         {

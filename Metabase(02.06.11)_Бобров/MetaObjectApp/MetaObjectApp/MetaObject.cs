@@ -11,11 +11,11 @@ namespace MetaObjectApp
     /// </summary>
     public class MetaObject
     {
-        protected long id;
+        protected long id;          //идентификатор метаобъекта
 
         //статические члены
-        public static List<AttrNameType> Attributes = new List<AttrNameType>();
-        public static string Type = MetaObjectType.MetaObject.ToString();
+        public static List<AttrNameType> Attributes = new List<AttrNameType>(); //список названий атрибутов. (метаданные)
+        public static string Type = MetaObjectType.MetaObject.ToString();       //имя типа. (метаданные)
 
         //свойства
         public long Id
@@ -26,10 +26,17 @@ namespace MetaObjectApp
             }
         }
         public string Identifier{get;set;}//строковый идентификатор (имя)
-        
+        public string TypeName
+        {
+            get;set;
+        }
+
+        public List<Attribute> attributes = new List<Attribute>();              //список атрибутов
         //контсруктор
         public MetaObject()
-        {}
+        {
+            TypeName = MetaObject.Type;
+        }
         //методы
         /// <summary>
         /// Сохранение метаобъекта в базу
@@ -45,7 +52,10 @@ namespace MetaObjectApp
             cmd.ExecuteNonQuery();
             //код для сохранения атрибутов в базе данных
             //ALTER
-            //пока нет атрибутов
+            foreach (MetaObjectApp.Attribute attr in this.attributes)
+            {
+                attr.Save(connection);
+            }
         }
         /// <summary>
         /// Загрузка из базы
@@ -63,6 +73,10 @@ namespace MetaObjectApp
                 this.id = (long)sr["id_metaobject"];
                 this.Identifier = sr["stridentifier"].ToString();
                 //код для загрузки атрибутов
+                foreach (MetaObjectApp.Attribute attr in this.attributes)
+                {
+                    attr.Load(connection);
+                }
                 return true;
             }
             else
@@ -79,6 +93,10 @@ namespace MetaObjectApp
                 this.id = (long)sr["id_metaobject"];
                 this.Identifier = sr["stridentifier"].ToString().Trim();
                 //код для загрузки атрибутов
+                foreach (MetaObjectApp.Attribute attr in this.attributes)
+                {
+                    attr.Load(connection);
+                }
                 return true;
             }
             else
@@ -101,6 +119,11 @@ namespace MetaObjectApp
             if (this.id >= 0)
             {
                 this.Identifier = StrIdentifier;
+
+                foreach (MetaObjectApp.Attribute attr in this.attributes)
+                {
+                    attr.Create(connection);
+                }
                 return true;
             }
             else
@@ -113,13 +136,8 @@ namespace MetaObjectApp
         /// <param name="connection"></param>
         public virtual bool CreateNew(SqlConnection connection,string StrIdentifier)
         {
-            if (CreateMetaObjRecord(connection, StrIdentifier, MetaObject.Type))//если создался новый метаобъект
-            {
-                //код для создания атрибутов в базе данных
-                return true;
-            }
-            else
-                return false;
+            return CreateMetaObjRecord(connection, StrIdentifier, this.TypeName);
+           
         }
      
     }

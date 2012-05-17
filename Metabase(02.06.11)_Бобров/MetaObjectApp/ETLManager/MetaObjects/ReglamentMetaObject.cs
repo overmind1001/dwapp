@@ -13,54 +13,18 @@ namespace ETLManager
 
 
         public static new string Type = MetaObjectType.Reglament.ToString();
-        public static new List<AttrNameType> Attributes = new List<AttrNameType>() {
-            new AttrNameType {Name=ELEMENT_LIST,Type= AttributeType.List} 
-        };
+        private static AttrNameType _ant_attrList = new AttrNameType { Name = "elementList", Type = AttributeType.List };
+        public static new List<AttrNameType> Attributes = new List<AttrNameType>() { _ant_attrList};
 
+        //Атрибуты
         public MetaObjectApp.Attribute elementList;
 
         public ReglamentMetaObject()
         {
+            this.TypeName = ReglamentMetaObject.Type;
             elementList = new MetaObjectApp.Attribute(this, ELEMENT_LIST, AttributeType.List, "");
+            attributes.Add(elementList);
         }
-
-        public override bool CreateNew(SqlConnection connection, string StrIdentifier)
-        {
-            if (CreateMetaObjRecord(connection, StrIdentifier, ReglamentMetaObject.Type))//если создался новый метаобъект
-            {
-                //код для создания атрибутов в базе данных
-                elementList.Create(connection);
-                return true;
-            }
-            else
-                return false;       
-        }
-        public override bool LoadFromDatabase(int id, SqlConnection connection)
-        {
-            if (base.LoadFromDatabase(id, connection))
-            {
-                elementList.Load(connection);
-                return true;
-            }
-            else
-                return false;
-        }
-        public override bool LoadFromDatabase(string strIdentifier, SqlConnection connection)
-        {
-            if (base.LoadFromDatabase(strIdentifier, connection))
-            {
-                elementList.Load(connection);
-                return true;
-            }
-            else
-                return false;
-        }
-        public override void SaveToDatabase(System.Data.SqlClient.SqlConnection connection)
-        {
-            base.SaveToDatabase(connection);
-            elementList.Save(connection);
-        }
-
 
         internal List<ReglamentElementMetaObject> GetReglamentElements()
         {

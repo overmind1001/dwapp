@@ -48,6 +48,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ETLManager\ETLManager.csproj">
+      <Project>{1E284A29-D11F-4B79-B792-EF260B575A88}</Project>
+      <Name>ETLManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetaObjectApp\MetaObjectApp.csproj">
+      <Project>{7D0A9D8A-C5EC-4143-9C9F-BE2E45C1FDB2}</Project>
+      <Name>MetaObjectApp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

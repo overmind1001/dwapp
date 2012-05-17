@@ -8,51 +8,19 @@ namespace MetaObjectApp
 {
     class DataSource:MetaObject
     {
+        //Метаданные
         public static new string Type = MetaObjectType.DataSource.ToString();
-        public static new List<AttrNameType> Attributes = new List<AttrNameType>() {new AttrNameType {Name="source",Type= AttributeType.String} };
+        private static AttrNameType _ant_source = new AttrNameType { Name = "source", Type = AttributeType.String };
+        public static new List<AttrNameType> Attributes = new List<AttrNameType>() { _ant_source };
 
+        //Атрибуты метаобъекта
         public Attribute source;
 
         public DataSource()
         {
-            source=new Attribute(this, "source", AttributeType.String, "");
-        }
-
-        public override bool CreateNew(SqlConnection connection, string StrIdentifier)
-        {
-            if (CreateMetaObjRecord(connection, StrIdentifier, DataSource.Type))//если создался новый метаобъект
-            {
-                //код для создания атрибутов в базе данных
-                source.Create(connection);
-                return true;
-            }
-            else
-                return false;       
-        }
-        public override bool LoadFromDatabase(int id, SqlConnection connection)
-        {
-            if (base.LoadFromDatabase(id, connection))
-            {
-                source.Load(connection);
-                return true;
-            }
-            else
-                return false;
-        }
-        public override bool LoadFromDatabase(string strIdentifier, SqlConnection connection)
-        {
-            if (base.LoadFromDatabase(strIdentifier, connection))
-            {
-                source.Load(connection);
-                return true;
-            }
-            else
-                return false;
-        }
-        public override void SaveToDatabase(System.Data.SqlClient.SqlConnection connection)
-        {
-            base.SaveToDatabase(connection);
-            source.Save(connection);
+            TypeName = DataSource.Type;
+            source=new Attribute(this, _ant_source);
+            attributes.Add(source);
         }
     }
 }
