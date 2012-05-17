@@ -53,7 +53,9 @@
     <Compile Include="EventManager\EventQueue.cs" />
     <Compile Include="EventManager\IDatasourceMonitor.cs" />
     <Compile Include="MetaObjects\ReglamentElementMetaObject.cs" />
+    <Compile Include="MetaObjects\ReglamentElementMetaObjectFactory.cs" />
     <Compile Include="MetaObjects\ReglamentMetaObject.cs" />
+    <Compile Include="MetaObjects\ReglamentMetaObjectFactory.cs" />
     <Compile Include="ReglamentManager\EventGenerator.cs" />
     <Compile Include="EventManager\EventManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,35 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
+using System.Linq;
 using System.Text;
+using MetaObjectApp;
 
-namespace MetaObjectApp
+namespace ETLManager
 {
-    public class DataSourceFactory:MetaObjectFactory
+    class ReglamentElementMetaObjectFactory : MetaObjectApp.MetaObjectFactory
     {
-        
-        public DataSourceFactory()
-        {
-        }
-
         public override string Name
         {
             get
             {
-                return DataSource.Type;
+                return ReglamentElementMetaObject.Type;
             }
         }
         public override List<AttrNameType> Attributes
         {
             get
             {
-                return DataSource.Attributes;
+                return ReglamentElementMetaObject.Attributes;
             }
         }
 
         public override MetaObject CreateObject()
         {
-            return new DataSource();
+            return new ReglamentElementMetaObject();
         }
     }
 }
