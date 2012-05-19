@@ -6,8 +6,13 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
-    class ReglamentElementMetaObjectFactory : MetaObjectApp.MetaObjectFactory
+    public class ReglamentElementMetaObjectFactory : MetaObjectApp.MetaObjectFactory
     {
+        public ReglamentElementMetaObjectFactory(MetaObjectRepository repository)
+            :base(repository)
+        {
+        }
+
         public override string Name
         {
             get
@@ -25,7 +30,7 @@ namespace ETLManager
 
         public override MetaObject CreateObject()
         {
-            return new ReglamentElementMetaObject();
+            return new ReglamentElementMetaObject(_repository);
         }
     }
 }

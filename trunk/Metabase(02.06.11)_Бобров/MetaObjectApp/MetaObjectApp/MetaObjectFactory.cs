@@ -9,7 +9,8 @@ namespace MetaObjectApp
     public class MetaObjectFactory
     {
         //поля
-        
+        protected MetaObjectRepository _repository;
+
         //свойства
         public virtual string Name
         {
@@ -27,8 +28,10 @@ namespace MetaObjectApp
         }
 
         //конструктор
-        public MetaObjectFactory()
-        {}
+        public MetaObjectFactory(MetaObjectRepository repository)
+        {
+            _repository = repository;
+        }
 
         //методы
         /// <summary>
@@ -37,7 +40,7 @@ namespace MetaObjectApp
         /// <returns></returns>
         public virtual MetaObject CreateObject()
         {
-            return new MetaObject();
+            return new MetaObject(_repository);
         }
 
         /// <summary>
@@ -77,5 +80,6 @@ namespace MetaObjectApp
             cmd.Parameters.Add(ptypeName);
             cmd.ExecuteNonQuery();
         }
+
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 //using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MetaObjectApp
 {
@@ -107,7 +109,7 @@ namespace MetaObjectApp
             if (!changed)
                 return;
 
-            SqlCommand cmd = new SqlCommand("SaveValue metaObj_id=@pmetaobject_id,@attr_id=@patr_id,@value=@pvalue", connection);
+            SqlCommand cmd = new SqlCommand("SaveValue metaObj_id=@pmetaobject_id,@attr_id=@patr_id,@value='@pvalue'", connection);
             SqlParameter pValue = new SqlParameter("@pvalue", this.value);
             SqlParameter pMetaobjectId = new SqlParameter("@pmetaobject_id", this.owner.Id);
             SqlParameter pAtrid = new SqlParameter("@patr_id", this.id);
@@ -130,9 +132,15 @@ namespace MetaObjectApp
                     cmd.CommandText = "UPDATE TIdValues SET value=@pvalue WHERE metaobject_id=@pmetaobject_id and atr_id=@patr_id";
                     break;
                 case AttributeType.List:
+                    List<int> list = Value as List<int>;
+                    byte[] buf = new byte[1024*1024];//мегабайт
+                    MemoryStream ms = new MemoryStream(buf);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(ms, list);
+                    pValue.Value = buf; 
                     cmd.CommandText = "UPDATE TListValues SET value=@pvalue WHERE metaobject_id=@pmetaobject_id and atr_id=@patr_id";
                     break;
-                case AttributeType.Binary://??
+                case AttributeType.Binary:
                     cmd.CommandText = "UPDATE TBinValues SET value=@pvalue WHERE metaobject_id=@pmetaobject_id and atr_id=@patr_id";
                     break;
             }
@@ -154,25 +162,56 @@ namespace MetaObjectApp
             SqlDataReader sdr = cmd.ExecuteReader();
             if (sdr.Read())
             {
-                this.value = sdr[0].ToString();
+                //this.value = sdr[0].ToString();
                 this.id = (long)sdr[1];
             }
             switch (this.type)
             {
                 case AttributeType.String:
-                    this.value = this.value.ToString().Trim();
+                    this.value = sdr[0].ToString().Trim();
                     break;
                 case AttributeType.Bigint:
+                    this.value = Convert.ToInt64(sdr[0]);
                     break;
                 case AttributeType.Double:
+                    this.value = Convert.ToDouble(sdr[0]);
                     break;
                 case AttributeType.Id:
+                    this.value = Convert.ToInt64(sdr[0]);
                     break;
                 case AttributeType.List:
+                    object o = sdr[0];
+                    byte[] buf=(byte[])o;
+                    if (buf.Length == 4)//костыль
+                    {
+                        this.value = null;
+                        break;
+                    }
+                    MemoryStream ms = new MemoryStream(buf);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    this.value = (List<int>)bf.Deserialize(ms);
+                   // this.value = (List<int>)sdr[0];///?????????????????????????
                     break;
-                case AttributeType.Binary://??
+                case AttributeType.Binary:
+                    this.value = sdr[0];
+                    //byte[] buf;
+                    //MemoryStream ms = new MemoryStream(buf);
+                    //BinaryFormatter bf = new BinaryFormatter();
+                    //bf.Deserialize(
+                    
+
                     break;
             }
+        }
+
+        public List<int> getListIds()
+        {
+            return value as List<int>;
+        }
+
+        public byte[] getBinary()
+        {
+            return value as byte[];
         }
     }
 }

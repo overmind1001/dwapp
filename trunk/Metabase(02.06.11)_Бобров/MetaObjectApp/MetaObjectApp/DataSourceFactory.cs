@@ -7,8 +7,9 @@ namespace MetaObjectApp
 {
     public class DataSourceFactory:MetaObjectFactory
     {
-        
-        public DataSourceFactory()
+
+        public DataSourceFactory(MetaObjectRepository repository)
+            :base(repository)
         {
         }
 
@@ -29,7 +30,7 @@ namespace MetaObjectApp
 
         public override MetaObject CreateObject()
         {
-            return new DataSource();
+            return new DataSource(_repository);
         }
     }
 }

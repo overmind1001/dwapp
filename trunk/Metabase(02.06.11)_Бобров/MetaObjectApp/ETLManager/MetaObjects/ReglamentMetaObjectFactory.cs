@@ -8,6 +8,10 @@ namespace ETLManager
 {
     public class ReglamentMetaObjectFactory : MetaObjectFactory
     {
+        public ReglamentMetaObjectFactory(MetaObjectRepository repository)
+            :base(repository)
+        {
+        }
         public override string Name
         {
             get
@@ -25,7 +29,7 @@ namespace ETLManager
 
         public override MetaObject CreateObject()
         {
-            return new ReglamentMetaObject();
+            return new ReglamentMetaObject(_repository);
         }
     }
 }

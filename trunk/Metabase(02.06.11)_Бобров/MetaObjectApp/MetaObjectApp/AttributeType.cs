@@ -7,6 +7,11 @@ namespace MetaObjectApp
 {
     public enum AttributeType
     {
-        String,Bigint,Double,List,Id,Binary
+        String,
+        Bigint,
+        Double,
+        List,
+        Id,
+        Binary
     }
 }

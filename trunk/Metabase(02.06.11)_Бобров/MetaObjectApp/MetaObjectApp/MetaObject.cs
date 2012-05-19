@@ -12,6 +12,7 @@ namespace MetaObjectApp
     public class MetaObject
     {
         protected long id;          //идентификатор метаобъекта
+        protected MetaObjectRepository _repository;
 
         //статические члены
         public static List<AttrNameType> Attributes = new List<AttrNameType>(); //список названий атрибутов. (метаданные)
@@ -33,9 +34,10 @@ namespace MetaObjectApp
 
         public List<Attribute> attributes = new List<Attribute>();              //список атрибутов
         //контсруктор
-        public MetaObject()
+        public MetaObject(MetaObjectRepository repository)
         {
             TypeName = MetaObject.Type;
+            _repository = repository;
         }
         //методы
         /// <summary>
