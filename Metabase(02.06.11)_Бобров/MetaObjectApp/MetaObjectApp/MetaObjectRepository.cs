@@ -154,6 +154,13 @@ namespace MetaObjectApp
             }
             connection.Close();
         }
+        /// <summary>
+        /// Очищает кэш
+        /// </summary>
+        public void ClearCache()
+        {
+            cache.Clear();
+        }
   
         
     }

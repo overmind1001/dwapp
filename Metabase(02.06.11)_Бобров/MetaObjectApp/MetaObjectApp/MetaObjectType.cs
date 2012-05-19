@@ -10,6 +10,7 @@ namespace MetaObjectApp
         MetaObject,
         Cube,
         DataSource,
-        Reglament
+        Reglament,
+        TestMetaObject
     }
 }

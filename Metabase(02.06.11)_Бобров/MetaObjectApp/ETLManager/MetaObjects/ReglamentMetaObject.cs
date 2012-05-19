@@ -9,9 +9,6 @@ namespace ETLManager
 {
     class ReglamentMetaObject : MetaObject
     {
-        public const string ELEMENT_LIST = "elementList";
-
-
         public static new string Type = MetaObjectType.Reglament.ToString();
         private static AttrNameType _ant_attrList = new AttrNameType { Name = "elementList", Type = AttributeType.List };
         public static new List<AttrNameType> Attributes = new List<AttrNameType>() { _ant_attrList};
@@ -19,16 +16,39 @@ namespace ETLManager
         //Атрибуты
         public MetaObjectApp.Attribute elementList;
 
-        public ReglamentMetaObject()
+        public ReglamentMetaObject(MetaObjectRepository repository)
+            : base(repository)
         {
             this.TypeName = ReglamentMetaObject.Type;
-            elementList = new MetaObjectApp.Attribute(this, ELEMENT_LIST, AttributeType.List, "");
+            elementList = new MetaObjectApp.Attribute(this, _ant_attrList);
             attributes.Add(elementList);
         }
 
-        internal List<ReglamentElementMetaObject> GetReglamentElements()
+        public List<ReglamentElementMetaObject> GetReglamentElements()
         {
-            throw new NotImplementedException();
+            List<int> list = elementList.Value as List<int>;
+            List<ReglamentElementMetaObject> reglamentElements = new List<ReglamentElementMetaObject>();
+            foreach (int inx in list)
+            {
+                ReglamentElementMetaObject remo = _repository.LoadMetaObject(inx) as ReglamentElementMetaObject;
+                reglamentElements.Add(remo);
+            }
+            return reglamentElements;
         }
+        public void SetReglamentElements(List<ReglamentElementMetaObject> reglamentElements)
+        {
+            List<int> list = new List<int>();
+     
+            foreach (ReglamentElementMetaObject remo in reglamentElements)
+            {
+                list.Add((int)remo.Id);
+            }
+            elementList.Value = list;
+        }
+        public void AddReglamentElement(ReglamentElementMetaObject remo)
+        {
+            //TODO
+        }
+        //remove
     }
 }

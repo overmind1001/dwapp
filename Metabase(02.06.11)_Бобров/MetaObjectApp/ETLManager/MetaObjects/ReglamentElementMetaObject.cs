@@ -6,7 +6,11 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
-    class ReglamentElementMetaObject : MetaObject
+    public class ReglamentElementMetaObject : MetaObject
     {
+        public ReglamentElementMetaObject(MetaObjectRepository repository)
+            : base(repository)
+        {
+        }
     }
 }

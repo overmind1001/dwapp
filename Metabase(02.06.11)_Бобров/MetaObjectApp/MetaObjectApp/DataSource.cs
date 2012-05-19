@@ -16,7 +16,8 @@ namespace MetaObjectApp
         //Атрибуты метаобъекта
         public Attribute source;
 
-        public DataSource()
+        public DataSource(MetaObjectRepository repository)
+            :base(repository)
         {
             TypeName = DataSource.Type;
             source=new Attribute(this, _ant_source);
