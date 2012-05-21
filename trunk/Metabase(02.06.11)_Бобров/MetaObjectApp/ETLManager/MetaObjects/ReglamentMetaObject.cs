@@ -47,8 +47,11 @@ namespace ETLManager
         }
         public void AddReglamentElement(ReglamentElementMetaObject remo)
         {
-            //TODO
+            ((List<int>)elementList.Value).Add((int)remo.Id);
         }
-        //remove
+        public void RemoveReglamentElement(ReglamentElementMetaObject remo)
+        {
+            ((List<int>)elementList.Value).Remove((int)remo.Id);
+        }
     }
 }

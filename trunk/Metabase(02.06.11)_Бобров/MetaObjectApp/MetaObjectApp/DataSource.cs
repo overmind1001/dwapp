@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace MetaObjectApp
 {
-    class DataSource:MetaObject
+    public class DataSource:MetaObject
     {
         //Метаданные
         public static new string Type = MetaObjectType.DataSource.ToString();
