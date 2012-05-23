@@ -14,7 +14,7 @@ namespace MetaObjectApp
             MetaObjectRepository repository = 
                 new MetaObjectRepository("Data Source=192.168.189.1;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=False;MultipleActiveResultSets=True;User ID=a; password=a");
             repository.AddFactory(new MetaObjectFactory(repository));
-            repository.AddFactory(new DataSourceFactory(repository));
+            //repository.AddFactory(new DataSourceFactory(repository));
             
             //создаем объект
             MetaObject mObj= repository.CreateNewMetaObject("MetaObject","aaa1");
