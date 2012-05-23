@@ -21,6 +21,13 @@ namespace App
             repository.AddFactory(new ReglamentMetaObjectFactory(repository));
             repository.AddFactory(new ReglamentElementMetaObjectFactory(repository));
             repository.AddFactory(new TestMetaObjectFactory(repository));
+            repository.AddFactory(new CubeFactory(repository));
+            repository.AddFactory(new CubesFactory(repository));
+            repository.AddFactory(new DataSourceEventFactory(repository));
+            repository.AddFactory(new DataSourceEventsFactory(repository));
+            repository.AddFactory(new DimensionFactory(repository));
+            repository.AddFactory(new ETLFactory(repository));
+            repository.AddFactory(new ETLsFactory(repository));
 
             //создаем объект
             MetaObject mObj = repository.CreateNewMetaObject("TestMetaObject", "test11");
