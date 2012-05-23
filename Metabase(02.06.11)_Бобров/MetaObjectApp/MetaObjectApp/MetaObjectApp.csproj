@@ -43,8 +43,6 @@
     <Compile Include="AttrNameType.cs" />
     <Compile Include="Attribute.cs" />
     <Compile Include="AttributeType.cs" />
-    <Compile Include="DataSource.cs" />
-    <Compile Include="DataSourceFactory.cs" />
     <Compile Include="MetaObject.cs" />
     <Compile Include="MetaObjectFactory.cs" />
     <Compile Include="MetaObjectRepository.cs" />

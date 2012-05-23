@@ -53,12 +53,14 @@
     <Compile Include="MetaObjects\CubeFactory.cs" />
     <Compile Include="MetaObjects\Cubes.cs" />
     <Compile Include="MetaObjects\CubesFactory.cs" />
+    <Compile Include="MetaObjects\DataSource.cs" />
     <Compile Include="MetaObjects\DataSourceEvent.cs" />
     <Compile Include="EventManager\EventQueue.cs" />
     <Compile Include="EventManager\IDatasourceMonitor.cs" />
     <Compile Include="MetaObjects\DataSourceEventFactory.cs" />
     <Compile Include="MetaObjects\DataSourceEvents.cs" />
     <Compile Include="MetaObjects\DataSourceEventsFactory.cs" />
+    <Compile Include="MetaObjects\DataSourceFactory.cs" />
     <Compile Include="MetaObjects\Dimension.cs" />
     <Compile Include="MetaObjects\DimensionFactory.cs" />
     <Compile Include="MetaObjects\ETL.cs" />
