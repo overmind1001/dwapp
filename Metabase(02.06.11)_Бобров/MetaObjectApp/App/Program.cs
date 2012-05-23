@@ -13,6 +13,7 @@ namespace App
     {
         static void Main(string[] args)
         {//192.168.189.1
+            Console.WriteLine(Cubes.Type);
             MetaObjectRepository repository =
                 new MetaObjectRepository("Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=False;MultipleActiveResultSets=True;User ID=a; password=a");
             repository.AddFactory(new MetaObjectFactory(repository));

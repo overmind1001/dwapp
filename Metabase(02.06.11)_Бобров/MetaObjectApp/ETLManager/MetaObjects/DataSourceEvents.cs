@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MetaObjectApp;
+
+namespace ETLManager
+{
+    public class DataSourceEvents : MetaObject
+    {
+        public static new string Type = MetaObjectType.DataSourceEvents.ToString();
+        //?????????????????????????????????????????????????????????????????????????????????????????   а пойдет ли атрибут с тем же именем?
+        private static AttrNameType _ant_attrList = new AttrNameType { Name = "elementList", Type = AttributeType.List };
+        public static new List<AttrNameType> Attributes = new List<AttrNameType>() { _ant_attrList};
+
+        //Атрибуты
+        private MetaObjectApp.Attribute elementList;
+
+        public List<int> DataSourceEventsIds
+        {
+            get
+            {
+                return elementList.Value as List<int>;
+            }
+            set
+            {
+                elementList.Value = value;
+            }
+        }
+        //Конструктор
+        public DataSourceEvents(MetaObjectRepository repository)
+            : base(repository)
+        {
+            this.TypeName = DataSourceEvents.Type;
+            elementList = new MetaObjectApp.Attribute(this, _ant_attrList);
+            attributes.Add(elementList);
+        }
+
+        public List<DataSourceEvent> GetDataSourceEvents()
+        {
+            List<int> list = elementList.Value as List<int>;
+            List<DataSourceEvent> dataSourceEvents = new List<DataSourceEvent>();
+            foreach (int inx in list)
+            {
+                DataSourceEvent remo = _repository.LoadMetaObject(inx) as DataSourceEvent;
+                dataSourceEvents.Add(remo);
+            }
+            return dataSourceEvents;
+        }
+        public void SetReglamentElements(List<DataSourceEvent> dataSourceEvents)
+        {
+            List<int> list = new List<int>();
+
+            foreach (DataSourceEvent dse in dataSourceEvents)
+            {
+                list.Add((int)dse.Id);
+            }
+            elementList.Value = list;
+        }
+        public void AddReglamentElement(DataSourceEvent dse)
+        {
+            ((List<int>)elementList.Value).Add((int)dse.Id);
+        }
+        public void RemoveReglamentElement(DataSourceEvent dse)
+        {
+            ((List<int>)elementList.Value).Remove((int)dse.Id);
+        }
+    }
+}

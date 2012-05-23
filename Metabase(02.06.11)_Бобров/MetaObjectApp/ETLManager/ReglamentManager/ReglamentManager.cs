@@ -26,17 +26,17 @@ namespace ETLManager
         /// Читает регламент
         /// </summary>
         /// <returns>Возвращает список произошедших событий.</returns>
-        public List<ETLEvent> ReadReglament()
+        public List<DataSourceEvent> ReadReglament()
         {
             List<ReglamentElementMetaObject> reglamentElements = _reglamentReader.GetCurrentTasks();    //получаем элементы регламента, которые сработали к текущему моменту
-            List<ETLEvent> eventList = _eventGenerator.GenerateEvents(reglamentElements);               //создаем события для полученных элементов регламента
+            List<DataSourceEvent> eventList = _eventGenerator.GenerateEvents(reglamentElements);               //создаем события для полученных элементов регламента
             return eventList;
         }
 
         void Init()
         {
             _reglamentReader = new ReglamentReader(_repository);
-            _eventGenerator = new EventGenerator();
+            _eventGenerator = new EventGenerator(_repository);
 
         }
     }

@@ -8,10 +8,16 @@ namespace MetaObjectApp
     public enum MetaObjectType
     {
         MetaObject,
-        Cube,
         DataSource,
         Reglament,
         ReglamentElement,
-        TestMetaObject
+        TestMetaObject,
+        DataSourceEvent,
+        DataSourceEvents,
+        ETLs,
+        ETL,
+        Cubes,
+        Cube,
+        Dimension
     }
 }
