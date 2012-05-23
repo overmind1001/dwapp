@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
+using System.Linq;
 using System.Text;
+using MetaObjectApp;
 
-namespace MetaObjectApp
+namespace ETLManager
 {
-    public class DataSourceFactory:MetaObjectFactory
+    public class DimensionFactory : MetaObjectFactory
     {
-        public DataSourceFactory(MetaObjectRepository repository)
+        public DimensionFactory(MetaObjectRepository repository)
             :base(repository)
         {
         }
-
         public override string Name
         {
             get
             {
-                return DataSource.Type;
+                return Dimension.Type;
             }
         }
         public override List<AttrNameType> Attributes
         {
             get
             {
-                return DataSource.Attributes;
+                return Dimension.Attributes;
             }
         }
 
         public override MetaObject CreateObject()
         {
-            return new DataSource(_repository);
+            return new Dimension(_repository);
         }
+
     }
 }

@@ -88,14 +88,14 @@ namespace ETLManager
         {
             while (_isRunning)
             {
-                List<ETLEvent> events = _reglamentManager.ReadReglament();
+                List<DataSourceEvent> events = _reglamentManager.ReadReglament();
                 if (events.Count > 0)
                 {//добавляем в очередь событий
                     _eventManager.AddEvents(events);
                 }
 
                 //Получение из очереди очередного события
-                ETLEvent e = _eventManager.GetNextEvent();
+                DataSourceEvent e = _eventManager.GetNextEvent();
                 if (e!=null)
                 {
                     _etlExecuteManager.ProcessEvent(e);

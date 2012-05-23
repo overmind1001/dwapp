@@ -15,7 +15,7 @@ namespace ETLManager
         {
         }
 
-        internal void ProcessEvent(ETLEvent e)
+        internal void ProcessEvent(DataSourceEvent e)
         {
             throw new NotImplementedException();
         }

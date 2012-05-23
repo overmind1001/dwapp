@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace ETLManager
 {
-    class ReglamentMetaObject : MetaObject
+    public class ReglamentMetaObject : MetaObject
     {
         public static new string Type = MetaObjectType.Reglament.ToString();
         private static AttrNameType _ant_attrList = new AttrNameType { Name = "elementList", Type = AttributeType.List };

@@ -10,12 +10,12 @@ namespace ETLManager
         EventQueue _eventQueue;
         DatasourceMonitorManager _datasourceMonitorManager;
 
-        internal void AddEvents(List<ETLEvent> events)
+        internal void AddEvents(List<DataSourceEvent> events)
         {
             throw new NotImplementedException();
         }
 
-        internal ETLEvent GetNextEvent()
+        internal DataSourceEvent GetNextEvent()
         {
             throw new NotImplementedException();
         }

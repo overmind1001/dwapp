@@ -38,7 +38,13 @@ namespace ETLManager
 
             foreach (ReglamentElementMetaObject re in regElMO)
             {
-                //jijio;
+                if (!re.Enabled)
+                    continue;
+
+                if ((re.NextRunTime - DateTime.Now).Minutes < 5)
+                {
+                    currentTasks.Add(re);
+                }
             }
 
             return currentTasks;
