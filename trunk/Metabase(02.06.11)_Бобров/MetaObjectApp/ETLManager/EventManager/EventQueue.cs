@@ -5,7 +5,27 @@ using System.Text;
 
 namespace ETLManager
 {
-    class EventQueue
+    class EventQueue : List<DataSourceEvent>
     {
+        public void AddEvents(List<DataSourceEvent> events)
+        {
+            foreach (DataSourceEvent e in events)
+            {
+                this.Add(e);
+            }
+        }
+
+        public DataSourceEvent PopFirst()
+        {
+            if (this.Count > 0)
+            {
+                DataSourceEvent e = this[0];
+                this.RemoveAt(0);
+                return e;
+            }
+            else
+                return null;
+            
+        }
     }
 }
