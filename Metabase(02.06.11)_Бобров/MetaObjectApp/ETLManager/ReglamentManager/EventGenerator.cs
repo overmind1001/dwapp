@@ -31,7 +31,19 @@ namespace ETLManager
             {
                 DataSourceEvent dse = _repository.CreateNewMetaObject(MetaObjectType.DataSourceEvent, "") as DataSourceEvent;
                 dse.SetDataSource(remo.getDataSource());
-                dse.EventType = "TimerEvent";
+                if (remo.ReglamentElementType == "ExecETL")
+                {
+                    dse.EventType = "ExecETL_Timer";
+                }
+                else if (remo.ReglamentElementType == "CheckDS")
+                {
+                    dse.EventType = "CheckDS_Timer";
+                }
+                else 
+                {
+                    throw new Exception("Неизвестный тип элемента регламента");
+                }
+                
                 _repository.Save(dse);
             }
             return events;

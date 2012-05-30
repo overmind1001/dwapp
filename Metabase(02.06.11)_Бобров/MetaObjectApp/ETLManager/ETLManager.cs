@@ -112,7 +112,7 @@ namespace ETLManager
         {
             _isRunning = false;
             _reglamentManager = new ReglamentManager(_repository);
-            _eventManager = new EventManager();
+            _eventManager = new EventManager(_repository);
             _etlExecuteManager = new ETLExecuteManager();
         }
     }

@@ -10,5 +10,10 @@ namespace ETLManager
     /// </summary>
     interface IDatasourceMonitor
     {
+        string Name { get; } //Имя плагина
+        string DataSourceName { get; }
+
+        bool DataSourceChanged();
+
     }
 }
