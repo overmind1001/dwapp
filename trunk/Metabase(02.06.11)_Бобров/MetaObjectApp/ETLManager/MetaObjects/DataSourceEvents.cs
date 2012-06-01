@@ -47,7 +47,7 @@ namespace ETLManager
             }
             return dataSourceEvents;
         }
-        public void SetReglamentElements(List<DataSourceEvent> dataSourceEvents)
+        public void SetDataSourceEvents(List<DataSourceEvent> dataSourceEvents)
         {
             List<int> list = new List<int>();
 
@@ -57,11 +57,11 @@ namespace ETLManager
             }
             elementList.Value = list;
         }
-        public void AddReglamentElement(DataSourceEvent dse)
+        public void AddDataSourceEvent(DataSourceEvent dse)
         {
             ((List<int>)elementList.Value).Add((int)dse.Id);
         }
-        public void RemoveReglamentElement(DataSourceEvent dse)
+        public void RemoveDataSourceEvent(DataSourceEvent dse)
         {
             ((List<int>)elementList.Value).Remove((int)dse.Id);
         }

@@ -7,5 +7,12 @@ namespace ETLManager
 {
     class EventDecryptor
     {
+        internal Dictionary<string,string> DecryptEvent(DataSourceEvent e)
+        {
+            //получить событие, узнать про датасорс и етл
+
+            //path, args
+            throw new NotImplementedException();
+        }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MetaObjectApp;
+using System.IO;
+using System.Reflection;
 
 namespace ETLManager
 {
@@ -24,6 +26,7 @@ namespace ETLManager
         {
             this._repository = repository;
             PluginsDirPath = "//Plugins";
+            monitorList = new List<IDatasourceMonitor>();
         }
 
         private void Raise_DS_Changed(DataSourceEvent e)
@@ -55,13 +58,51 @@ namespace ETLManager
             AcyncDelegate d = new AcyncDelegate(() => {
                 if (dsm.DataSourceChanged())
                 {
-                  s  Raise_DS_Changed(new DataSourceEvent(_repository) {EventType="sdfsf Надо сохранить евент в репозитории?" });
+                    //TODO подумать о блокировках
+                    //создаем новый метаобъект "событие"
+                    DataSourceEvent newEvent = (DataSourceEvent) _repository.CreateNewMetaObject(MetaObjectType.DataSourceEvent,"");
+                    newEvent.EventType = "";
+                    _repository.Save(newEvent);
+
+                    //добавляем этот метаобъект в метаобъект "события"
+                    DataSourceEvents events = _repository.LoadMetaObject("DataSourceEvents") as DataSourceEvents;
+                    events.AddDataSourceEvent(newEvent);
+                    _repository.Save(events);
+
+                    Raise_DS_Changed(newEvent);
                 }
             });
 
             d.BeginInvoke(null, null);
         }
 
-
+        public void LoadPlugins()
+        {
+            monitorList.Clear();
+            // папка с плагинами
+            string folder = System.AppDomain.CurrentDomain.BaseDirectory+PluginsDirPath;
+            // dll-файлы в этой папке
+            string[] files = Directory.GetFiles(folder, "*.dll");
+            foreach (string file in files)
+            {
+                try
+                {
+                    Assembly assembly = Assembly.LoadFile(file);
+                    foreach (Type type in assembly.GetTypes())
+                    {
+                        Type iface = type.GetInterface("IDatasourceMonitor");
+                        if (iface != null)
+                        {
+                            IDatasourceMonitor plugin = (IDatasourceMonitor)Activator.CreateInstance(type);
+                            monitorList.Add(plugin);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ошибка загрузки плагина\n" + ex.Message);
+                }
+            }
+        }
     }
 }
