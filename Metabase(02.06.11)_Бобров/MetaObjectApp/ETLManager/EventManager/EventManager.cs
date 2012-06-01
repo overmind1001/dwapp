@@ -8,6 +8,7 @@ namespace ETLManager
 {
     class EventManager
     {
+        //Поля
         MetaObjectRepository _repository;
 
         EventQueue _eventQueue;
@@ -34,7 +35,7 @@ namespace ETLManager
                     {
                         _datasourceMonitorManager.DS_Changed += 
                             (ev) => 
-                        {//осторожно, может сделать критическую секцию?
+                        {//TODO осторожно, может сделать критическую секцию?
                             this._eventQueue.Add(ev);
                         };
                         _datasourceMonitorManager.CheckDataSource(e.GetDataSource() );//тут запускается проверка источника 
