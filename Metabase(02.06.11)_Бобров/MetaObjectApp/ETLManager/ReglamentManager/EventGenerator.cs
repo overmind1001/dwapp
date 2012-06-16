@@ -47,6 +47,14 @@ namespace ETLManager
                 _repository.Save(dse);
                 dses.AddDataSourceEvent(dse);
                 events.Add(dse);
+
+                //генерация новых элементов регламента в связи с периодичностью 
+                if (remo.Period.TotalSeconds > 0.1)
+                {
+                    remo.LastRunTime = remo.NextRunTime;
+                    remo.NextRunTime += remo.Period;
+                    _repository.Save(remo);
+                }
             }
             _repository.Save(dses);
             return events;

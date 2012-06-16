@@ -100,6 +100,7 @@ namespace ETLManager
                 {
                     _etlExecuteManager.ProcessEvent(e);
                     Console.WriteLine("Длина очереди {0}", _eventManager.EventCount());
+                    Console.WriteLine("Текущее время: {0}",DateTime.Now);
                 }
                 Thread.Sleep(10000);
                 Console.Write(".");
