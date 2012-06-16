@@ -132,7 +132,7 @@ namespace App
             rmo.AddReglamentElement(remo);
             remo.Enabled = true;
             remo.ReglamentElementType="ExecETL";
-            remo.NextRunTime = DateTime.Parse("00:37 16.6.2012");
+            remo.NextRunTime = DateTime.Parse("13:14 16.6.2012");
             remo.Period = TimeSpan.FromMinutes(5);
             remo.SetDataSource(ds);
             
