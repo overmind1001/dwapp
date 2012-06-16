@@ -47,6 +47,8 @@ namespace ETLManager
         }
         public void AddReglamentElement(ReglamentElementMetaObject remo)
         {
+            if (elementList.Value == null)
+                elementList.Value = new List<int>();
             ((List<int>)elementList.Value).Add((int)remo.Id);
         }
         public void RemoveReglamentElement(ReglamentElementMetaObject remo)

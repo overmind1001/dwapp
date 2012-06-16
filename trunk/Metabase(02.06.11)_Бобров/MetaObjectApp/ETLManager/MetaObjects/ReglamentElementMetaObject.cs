@@ -73,11 +73,11 @@ namespace ETLManager
                 lastRunTime.Value = value.ToString();
             }
         }
-        public DateTime Period
+        public TimeSpan Period
         {
             get
             {
-                return DateTime.Parse(period.ToString());
+                return TimeSpan.Parse(period.ToString());
             }
             set
             {
@@ -132,6 +132,10 @@ namespace ETLManager
         {
             DataSource ds = _repository.LoadMetaObject((int)DataSourceId) as DataSource;
             return ds;
+        }
+        public void SetDataSource(DataSource ds)
+        {
+            DataSourceId = ds.Id;
         }
     }
 }

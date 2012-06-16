@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ETLManager.ETLManager">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAACBAAAAAAIABQAACAAAAAgAAYAACAAACAgA=</HashCode>
+      <FileName>ETLManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ETLManager.ETLExecuteManager" Collapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAABAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ETLExecuteManager\ETLExecuteManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ETLManager.EventDecryptor" Collapsed="true">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ETLExecuteManager\EventDecryptor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ETLManager.EventGenerator" Collapsed="true">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>ReglamentManager\EventGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ETLManager.EventManager" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAABAAABAAAAAAAAAACAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>EventManager\EventManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ETLManager.EventQueue" Collapsed="true">
+    <Position X="2.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventManager\EventQueue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ETLManager.ReglamentManager" Collapsed="true">
+    <Position X="1" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAQAAAAAAAAAIAAAAACAAIAAAA=</HashCode>
+      <FileName>ReglamentManager\ReglamentManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ETLManager.ReglamentReader" Collapsed="true">
+    <Position X="1" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ReglamentManager\ReglamentReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

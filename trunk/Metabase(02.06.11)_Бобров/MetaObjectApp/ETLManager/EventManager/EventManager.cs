@@ -59,5 +59,10 @@ namespace ETLManager
             DataSourceEvent e = _eventQueue.PopFirst();//выталкивает первый элемент из очереди
             return e;
         }
+
+        public int EventCount()
+        {
+            return _eventQueue.Count;
+        }
     }
 }

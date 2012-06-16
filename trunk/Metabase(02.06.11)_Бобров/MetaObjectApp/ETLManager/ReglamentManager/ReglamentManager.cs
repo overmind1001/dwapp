@@ -19,6 +19,7 @@ namespace ETLManager
         public ReglamentManager(MetaObjectRepository repository)
         {
             _repository = repository;
+            Init();
         }
         //Методы
 

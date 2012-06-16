@@ -161,7 +161,14 @@ namespace MetaObjectApp
         {
             cache.Clear();
         }
-  
+
+        public MetaObject CreateOrLoadMetaObject(MetaObjectType type, string StrIdentifier)
+        {
+            MetaObject mo = CreateNewMetaObject(type, StrIdentifier);
+            if (mo == null)
+                mo = LoadMetaObject(StrIdentifier);
+            return mo;
+        }
         
     }
 }

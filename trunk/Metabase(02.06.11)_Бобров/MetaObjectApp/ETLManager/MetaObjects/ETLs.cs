@@ -59,6 +59,10 @@ namespace ETLManager
         }
         public void AddETL(ETL etl)
         {
+            if (elementList.Value == null)
+            {
+                elementList.Value = new List<int>();
+            }
             ((List<int>)elementList.Value).Add((int)etl.Id);
         }
         public void RemoveReglamentElement(ETL etl)

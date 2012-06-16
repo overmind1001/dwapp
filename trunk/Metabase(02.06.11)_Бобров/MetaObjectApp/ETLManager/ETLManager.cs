@@ -46,8 +46,8 @@ namespace ETLManager
         }
         public  ETLManager(MetaObjectRepository repository)
         {
-            Init();
             _repository = repository;
+            Init();
         }
 
         //методы
@@ -99,7 +99,10 @@ namespace ETLManager
                 if (e!=null)
                 {
                     _etlExecuteManager.ProcessEvent(e);
+                    Console.WriteLine("Длина очереди {0}", _eventManager.EventCount());
                 }
+                Thread.Sleep(10000);
+                Console.Write(".");
             }
         }
 
