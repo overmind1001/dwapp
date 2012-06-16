@@ -6,7 +6,7 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
-    class ReglamentReader
+    public class ReglamentReader
     {
         //Поля
         MetaObjectRepository _repository;
@@ -41,7 +41,9 @@ namespace ETLManager
                 if (!re.Enabled)
                     continue;
 
-                if ((re.NextRunTime - DateTime.Now).Minutes < 5)
+                int minutes = (re.NextRunTime - DateTime.Now).Minutes;
+
+                if (minutes < 1 && minutes>-1)
                 {
                     currentTasks.Add(re);
                 }

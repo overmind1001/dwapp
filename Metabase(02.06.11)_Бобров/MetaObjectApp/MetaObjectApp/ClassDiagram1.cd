@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MetaObjectApp.Attribute" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgYAAAAAAgAAABAAAAAQAAAAFAOAAAQAgAAAAAgA=</HashCode>
+      <FileName>Attribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetaObjectApp.MetaObject" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAABAAAAAAAAAAgARAAAAEBAAAQAIQAAAAgA=</HashCode>
+      <FileName>MetaObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetaObjectApp.MetaObjectFactory" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACABAAAAAAAAAAAQQAAAAAgAAAAAAAAAQAAA=</HashCode>
+      <FileName>MetaObjectFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetaObjectApp.MetaObjectRepository" Collapsed="true">
+    <Position X="1.25" Y="2.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>QCAAAIAAAAAQAAgBAAABAAAAAAAAAAAAAAABCAABAAA=</HashCode>
+      <FileName>MetaObjectRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="MetaObjectApp.AttrNameType" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>AttrNameType.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="MetaObjectApp.AttributeType" Collapsed="true">
+    <Position X="1.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEQAAAAAAAAAAQAAAAAAAAAACAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>AttributeType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MetaObjectApp.MetaObjectType" Collapsed="true">
+    <Position X="1.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQgEAAAgAAgABhABAAAAAAACAAAAQIAAAAAAAAAAAAA=</HashCode>
+      <FileName>MetaObjectType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

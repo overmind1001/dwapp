@@ -109,7 +109,8 @@ namespace MetaObjectApp
             if (!changed)
                 return;
 
-            SqlCommand cmd = new SqlCommand("SaveValue metaObj_id=@pmetaobject_id,@attr_id=@patr_id,@value='@pvalue'", connection);
+            //SqlCommand cmd = new SqlCommand("SaveValue metaObj_id=@pmetaobject_id,@attr_id=@patr_id,@value='@pvalue'", connection);
+            SqlCommand cmd = new SqlCommand("", connection);
             SqlParameter pValue = new SqlParameter("@pvalue", this.value);
             SqlParameter pMetaobjectId = new SqlParameter("@pmetaobject_id", this.owner.Id);
             SqlParameter pAtrid = new SqlParameter("@patr_id", this.id);
@@ -165,6 +166,8 @@ namespace MetaObjectApp
                 //this.value = sdr[0].ToString();
                 this.id = (long)sdr[1];
             }
+            if (!sdr.HasRows)
+                return;
             switch (this.type)
             {
                 case AttributeType.String:
@@ -180,6 +183,8 @@ namespace MetaObjectApp
                     this.value = Convert.ToInt64(sdr[0]);
                     break;
                 case AttributeType.List:
+                    
+
                     object o = sdr[0];
                     byte[] buf=(byte[])o;
                     if (buf.Length == 4)//костыль
@@ -189,7 +194,14 @@ namespace MetaObjectApp
                     }
                     MemoryStream ms = new MemoryStream(buf);
                     BinaryFormatter bf = new BinaryFormatter();
-                    this.value = (List<int>)bf.Deserialize(ms);
+                    try
+                    {
+                        this.value = (List<int>)bf.Deserialize(ms);
+                    }
+                    catch
+                    {
+                        value = null;
+                    }
                    // this.value = (List<int>)sdr[0];///?????????????????????????
                     break;
                 case AttributeType.Binary:
@@ -212,6 +224,11 @@ namespace MetaObjectApp
         public byte[] getBinary()
         {
             return value as byte[];
+        }
+
+        public override string ToString()
+        {
+            return value.ToString();
         }
     }
 }

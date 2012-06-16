@@ -45,7 +45,10 @@ namespace ETLManager
                 }
                 
                 _repository.Save(dse);
+                dses.AddDataSourceEvent(dse);
+                events.Add(dse);
             }
+            _repository.Save(dses);
             return events;
         }
     }

@@ -12,15 +12,17 @@ namespace ETLManager
 
         private static AttrNameType _ant_attrAssemblyPath = new AttrNameType { Name = "assemblyPath", Type = AttributeType.String };
         private static AttrNameType _ant_attrDataSourceId = new AttrNameType { Name = "dataSourceId", Type = AttributeType.Id };
+        private static AttrNameType _ant_attrAssemblyArgs = new AttrNameType { Name = "assemblyArgs", Type = AttributeType.String };
         public static new List<AttrNameType> Attributes = new List<AttrNameType>() { 
             _ant_attrAssemblyPath,
-            _ant_attrDataSourceId
+            _ant_attrDataSourceId,
+            _ant_attrAssemblyArgs
         };
 
         //Атрибуты
         private MetaObjectApp.Attribute assemblyPath;
         private MetaObjectApp.Attribute dataSourceId;
-      
+        private MetaObjectApp.Attribute assemblyArgs;
 
         //свойства
         public string AssemblyPath
@@ -45,7 +47,18 @@ namespace ETLManager
                 dataSourceId.Value = value;
             }
         }
-        
+        public string AssemblyArgs
+        {
+            get
+            {
+                return assemblyArgs.Value.ToString();
+            }
+            set
+            {
+                assemblyArgs.Value = value;
+            }
+        }
+
         //Конструктор
         public ETL(MetaObjectRepository repository)
             : base(repository)
@@ -54,9 +67,11 @@ namespace ETLManager
 
             assemblyPath = new MetaObjectApp.Attribute(this, _ant_attrAssemblyPath);
             dataSourceId = new MetaObjectApp.Attribute(this, _ant_attrDataSourceId);
+            assemblyArgs = new MetaObjectApp.Attribute(this, _ant_attrAssemblyArgs);
 
             attributes.Add(assemblyPath);
             attributes.Add(dataSourceId);
+            attributes.Add(assemblyArgs);
         }
 
         public DataSource getDataSource()

@@ -59,6 +59,8 @@ namespace ETLManager
         }
         public void AddDataSourceEvent(DataSourceEvent dse)
         {
+            if (elementList.Value == null)
+                elementList.Value = new List<int>();
             ((List<int>)elementList.Value).Add((int)dse.Id);
         }
         public void RemoveDataSourceEvent(DataSourceEvent dse)
