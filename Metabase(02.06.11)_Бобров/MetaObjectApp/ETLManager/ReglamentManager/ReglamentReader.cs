@@ -35,19 +35,25 @@ namespace ETLManager
             //Получаем элементы регламента. Смотрим какие из них по дате активации совпадают с текущим временем. Добавляем их в список
             //TODO
             List<ReglamentElementMetaObject> regElMO = rmo.GetReglamentElements();
-
+            int ol = Console.CursorLeft;
+            int ot = Console.CursorTop;
             foreach (ReglamentElementMetaObject re in regElMO)
             {
                 if (!re.Enabled)
                     continue;
 
-                int minutes = (re.NextRunTime - DateTime.Now).Minutes;
+                int sec = (int)(re.NextRunTime - DateTime.Now).TotalSeconds;
 
-                if (minutes < 1 && minutes>-1)
+                if(sec>0)
+                    Console.Write("\n{0}:{1}|",re.ReglamentElementType, sec);
+                
+
+                if (sec < 2 && sec > -1)
                 {
                     currentTasks.Add(re);
                 }
             }
+            Console.SetCursorPosition(ol, ot);
 
             return currentTasks;
         }

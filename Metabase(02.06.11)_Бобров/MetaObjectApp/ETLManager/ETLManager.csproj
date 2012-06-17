@@ -56,7 +56,6 @@
     <Compile Include="MetaObjects\DataSource.cs" />
     <Compile Include="MetaObjects\DataSourceEvent.cs" />
     <Compile Include="EventManager\EventQueue.cs" />
-    <Compile Include="EventManager\IDatasourceMonitor.cs" />
     <Compile Include="MetaObjects\DataSourceEventFactory.cs" />
     <Compile Include="MetaObjects\DataSourceEvents.cs" />
     <Compile Include="MetaObjects\DataSourceEventsFactory.cs" />
@@ -80,6 +79,10 @@
     <Compile Include="ReglamentManager\ReglamentReader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IDatasourceMonitor\IDatasourceMonitor.csproj">
+      <Project>{F5BC75C0-57B1-4023-B20E-F237307BC7D7}</Project>
+      <Name>IDatasourceMonitor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MetaObjectApp\MetaObjectApp.csproj">
       <Project>{7D0A9D8A-C5EC-4143-9C9F-BE2E45C1FDB2}</Project>
       <Name>MetaObjectApp</Name>

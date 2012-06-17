@@ -34,7 +34,7 @@ namespace MetaObjectApp
             this.id = 0;
             this.name = attrNameType.Name;
             this.type = attrNameType.Type;
-            this.value = "";
+            this.value = null;
             this.changed = false;
             this.owner = owner;
         }
@@ -72,7 +72,7 @@ namespace MetaObjectApp
                 this.changed = true;
             }
         }
-        bool Changed
+        public bool Changed
         {
             get
             {

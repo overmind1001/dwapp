@@ -5,6 +5,7 @@ using System.Text;
 using MetaObjectApp;
 using System.IO;
 using System.Reflection;
+using IDatasourceMonitorNS;
 
 namespace ETLManager
 {
@@ -25,7 +26,7 @@ namespace ETLManager
         public DatasourceMonitorManager(MetaObjectRepository repository)
         {
             this._repository = repository;
-            PluginsDirPath = "//Plugins";
+            PluginsDirPath = "Plugins";
             monitorList = new List<IDatasourceMonitor>();
         }
 
@@ -56,12 +57,19 @@ namespace ETLManager
                 return;
 
             AcyncDelegate d = new AcyncDelegate(() => {
-                if (dsm.DataSourceChanged())
+                string newControlSum = dsm.controlSum();
+                if (newControlSum + "3" != dataSource.ControlSum)//контрольная сумма изменилась
                 {
+                    //сохраняем новую контрольную сумму
+                    dataSource.ControlSum = newControlSum;
+                    _repository.Save(dataSource);
+
+
                     //TODO подумать о блокировках
                     //создаем новый метаобъект "событие"
                     DataSourceEvent newEvent = (DataSourceEvent) _repository.CreateNewMetaObject(MetaObjectType.DataSourceEvent,"");
-                    newEvent.EventType = "";
+                    newEvent.EventType = "DSchanged";
+                    newEvent.SetDataSource(dataSource);
                     _repository.Save(newEvent);
 
                     //добавляем этот метаобъект в метаобъект "события"

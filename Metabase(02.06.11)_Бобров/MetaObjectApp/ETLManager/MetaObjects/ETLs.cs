@@ -64,10 +64,12 @@ namespace ETLManager
                 elementList.Value = new List<int>();
             }
             ((List<int>)elementList.Value).Add((int)etl.Id);
+            elementList.Changed = true;
         }
         public void RemoveReglamentElement(ETL etl)
         {
             ((List<int>)elementList.Value).Remove((int)etl.Id);
+            elementList.Changed = true;
         }
     }
 }

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{36916202-8106-440B-B834-EC3499B5AD67}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D5A55B0A-3CD8-4913-949E-74479484E72C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>App</RootNamespace>
-    <AssemblyName>App</AssemblyName>
+    <RootNamespace>DataSourceCheckerPlugin</RootNamespace>
+    <AssemblyName>DataSourceCheckerPlugin</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,21 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="DataSourceCheckerPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ETLManager\ETLManager.csproj">
-      <Project>{1E284A29-D11F-4B79-B792-EF260B575A88}</Project>
-      <Name>ETLManager</Name>
+    <ProjectReference Include="..\IDatasourceMonitor\IDatasourceMonitor.csproj">
+      <Project>{F5BC75C0-57B1-4023-B20E-F237307BC7D7}</Project>
+      <Name>IDatasourceMonitor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MetaObjectApp\MetaObjectApp.csproj">
-      <Project>{7D0A9D8A-C5EC-4143-9C9F-BE2E45C1FDB2}</Project>
-      <Name>MetaObjectApp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -70,4 +63,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\DataSourceCheckerPlugin\bin\Debug\*" "D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\MetaObjectApp\App\bin\Debug\Plugins"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

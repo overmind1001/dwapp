@@ -102,7 +102,7 @@ namespace ETLManager
                     Console.WriteLine("Длина очереди {0}", _eventManager.EventCount());
                     Console.WriteLine("Текущее время: {0}",DateTime.Now);
                 }
-                Thread.Sleep(10000);
+                Thread.Sleep(1000);
                 Console.Write(".");
             }
         }

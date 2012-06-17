@@ -60,10 +60,12 @@ namespace ETLManager
         public void AddReglamentElement(Cube cube)
         {
             ((List<int>)elementList.Value).Add((int)cube.Id);
+            elementList.Changed = true;
         }
         public void RemoveReglamentElement(Cube cube)
         {
             ((List<int>)elementList.Value).Remove((int)cube.Id);
+            elementList.Changed = true;
         }
     }
 }
