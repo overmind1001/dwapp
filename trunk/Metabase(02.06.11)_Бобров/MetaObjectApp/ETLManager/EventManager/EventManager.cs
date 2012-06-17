@@ -20,6 +20,12 @@ namespace ETLManager
             _repository = repository;
             _eventQueue = new EventQueue();
             _datasourceMonitorManager = new DatasourceMonitorManager(_repository);
+            _datasourceMonitorManager.LoadPlugins();
+            _datasourceMonitorManager.DS_Changed +=
+                            (ev) =>
+                            {//TODO осторожно, может сделать критическую секцию?
+                                this._eventQueue.Add(ev);
+                            };
         }
 
         //Методы
@@ -33,11 +39,7 @@ namespace ETLManager
                 {
                     if( _datasourceMonitorManager.NameRegistered(  e.GetDataSource().DataSourceName ))
                     {
-                        _datasourceMonitorManager.DS_Changed += 
-                            (ev) => 
-                        {//TODO осторожно, может сделать критическую секцию?
-                            this._eventQueue.Add(ev);
-                        };
+                        
                         _datasourceMonitorManager.CheckDataSource(e.GetDataSource() );//тут запускается проверка источника 
                         eventsToRemove.Add(e);
                     }

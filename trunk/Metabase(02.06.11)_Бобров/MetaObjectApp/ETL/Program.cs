@@ -13,8 +13,8 @@ namespace ETL
 {
     class Program
     {
-        static string url = "http://www.gks.ru/free_doc/new_site/population/demo/demo13.xls";
-        static string file = Directory.GetCurrentDirectory() + @"\demo13.xls";
+        static string url = "http://www.gks.ru/free_doc/new_site/population/demo/demo14.xls";
+        static string file = Directory.GetCurrentDirectory() + @"\demo14.xls";
 
         public static void ODBC()
         {
@@ -25,7 +25,6 @@ namespace ETL
             DataTable table = new DataTable();
             oConn.Open();
             table.Load(oCmd.ExecuteReader());
-            int a = 0;
         }
 
         public static void Download()

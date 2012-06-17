@@ -3,6 +3,7 @@ using System.Collections.Generic;
 //using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Threading;
 
 namespace MetaObjectApp
 {
@@ -12,6 +13,8 @@ namespace MetaObjectApp
         string connectionString;
         SqlConnection connection;
         List<MetaObjectFactory> factories;
+
+        //блокировки
 
         //консруктор
         public MetaObjectRepository(string connectionString)
@@ -41,17 +44,20 @@ namespace MetaObjectApp
         /// <returns></returns>
         public MetaObject CreateNewMetaObject(string nameType,string StrIdentifier)
         {
-            MetaObjectFactory factory = factories.Find(f => { return f.Name == nameType; });
-            if (factory == null)
-                return null;
-            MetaObject mObj = factory.CreateObject();//создаем объект в памяти
-            connection.Open();
-            bool moCreated = mObj.CreateNew(connection, StrIdentifier);//создаем его в базе
-            connection.Close();
-            if (!moCreated)//если не создался(такой идентификатор уже занят), то возвращаем пустую ссылку
-                return null;
-            cache.Add(mObj);
-            return mObj;
+            lock (this)
+            {
+                MetaObjectFactory factory = factories.Find(f => { return f.Name == nameType; });
+                if (factory == null)
+                    return null;
+                MetaObject mObj = factory.CreateObject();//создаем объект в памяти
+                connection.Open();
+                bool moCreated = mObj.CreateNew(connection, StrIdentifier);//создаем его в базе
+                connection.Close();
+                if (!moCreated)//если не создался(такой идентификатор уже занят), то возвращаем пустую ссылку
+                    return null;
+                cache.Add(mObj);
+                return mObj;
+            }
         }
         public MetaObject CreateNewMetaObject(MetaObjectType type, string StrIdentifier)
         {
@@ -64,33 +70,36 @@ namespace MetaObjectApp
         /// <returns></returns>
         public MetaObject LoadMetaObject(int id)
         {//если в кэше есть объект, то сразу кинуть ссылку
-            MetaObject mObj = cache.Find(m => { return (m.Id == id); });
-            if (mObj == null)//нет в кэше
+            lock (this)
             {
-                connection.Open();
-                SqlCommand cmdGetTypeName = new SqlCommand("SELECT mot.name FROM TMetaObjects mo,TMetaObjectTypes mot WHERE mo.type_id=mot.id_type AND mo.id_metaobject=@id", connection);
-                SqlParameter pId = new SqlParameter("@id", id);
-                cmdGetTypeName.Parameters.Add(pId);
-                SqlDataReader sr = cmdGetTypeName.ExecuteReader();
-                if (!sr.Read())
+                MetaObject mObj = cache.Find(m => { return (m.Id == id); });
+                if (mObj == null)//нет в кэше
                 {
-                    connection.Close();
-                    return null;
-                }
-                string typeName=sr["name"].ToString().Trim();
+                    connection.Open();
+                    SqlCommand cmdGetTypeName = new SqlCommand("SELECT mot.name FROM TMetaObjects mo,TMetaObjectTypes mot WHERE mo.type_id=mot.id_type AND mo.id_metaobject=@id", connection);
+                    SqlParameter pId = new SqlParameter("@id", id);
+                    cmdGetTypeName.Parameters.Add(pId);
+                    SqlDataReader sr = cmdGetTypeName.ExecuteReader();
+                    if (!sr.Read())
+                    {
+                        connection.Close();
+                        return null;
+                    }
+                    string typeName = sr["name"].ToString().Trim();
 
-                MetaObjectFactory factory = factories.Find(f => { return f.Name == typeName; });
-                if (factory == null)
-                {
+                    MetaObjectFactory factory = factories.Find(f => { return f.Name == typeName; });
+                    if (factory == null)
+                    {
+                        connection.Close();
+                        return null;
+                    }
+                    mObj = factory.CreateObject();
+                    mObj.LoadFromDatabase(id, connection);
+                    cache.Add(mObj);
                     connection.Close();
-                    return null;
                 }
-                mObj = factory.CreateObject();
-                mObj.LoadFromDatabase(id, connection);
-                cache.Add(mObj);
-                connection.Close();
+                return mObj;
             }
-            return mObj;
         }
         /// <summary>
         /// Загрузка существующего метаобъекта по строковому идентификатору
@@ -99,35 +108,38 @@ namespace MetaObjectApp
         /// <returns></returns>
         public MetaObject LoadMetaObject(string strIdentifier)
         {//если в кэше есть объект, то сразу кинуть ссылку
-            MetaObject mObj = cache.Find(m => { return (m.Identifier == strIdentifier); });
-            if (mObj == null)//нет в кэше
+            lock (this)
             {
-                connection.Open();
-                SqlCommand cmdGetTypeName = new SqlCommand("SELECT mot.name FROM TMetaObjects mo,TMetaObjectTypes mot WHERE mo.type_id=mot.id_type AND mo.stridentifier=@pStrIdentifier", connection);
-                SqlParameter pStrIdentifier = new SqlParameter("@pStrIdentifier", strIdentifier);
-                cmdGetTypeName.Parameters.Add(pStrIdentifier);
-                SqlDataReader sr = cmdGetTypeName.ExecuteReader();
-                if (!sr.Read())//нет такого метаобъекта
+                MetaObject mObj = cache.Find(m => { return (m.Identifier == strIdentifier); });
+                if (mObj == null)//нет в кэше
                 {
-                    connection.Close();
-                    return null;
-                }
-                string typeName = sr["name"].ToString().Trim();
+                    connection.Open();
+                    SqlCommand cmdGetTypeName = new SqlCommand("SELECT mot.name FROM TMetaObjects mo,TMetaObjectTypes mot WHERE mo.type_id=mot.id_type AND mo.stridentifier=@pStrIdentifier", connection);
+                    SqlParameter pStrIdentifier = new SqlParameter("@pStrIdentifier", strIdentifier);
+                    cmdGetTypeName.Parameters.Add(pStrIdentifier);
+                    SqlDataReader sr = cmdGetTypeName.ExecuteReader();
+                    if (!sr.Read())//нет такого метаобъекта
+                    {
+                        connection.Close();
+                        return null;
+                    }
+                    string typeName = sr["name"].ToString().Trim();
 
-                MetaObjectFactory factory = factories.Find(f => { return f.Name == typeName; });
-                if (factory == null)
-                {
+                    MetaObjectFactory factory = factories.Find(f => { return f.Name == typeName; });
+                    if (factory == null)
+                    {
+                        connection.Close();
+                        return null;
+                    }
+                    mObj = factory.CreateObject();
+                    bool moLoaded = mObj.LoadFromDatabase(strIdentifier, connection);
                     connection.Close();
-                    return null;
+                    if (!moLoaded)
+                        return null;
+                    cache.Add(mObj);
                 }
-                mObj = factory.CreateObject();
-                bool moLoaded = mObj.LoadFromDatabase(strIdentifier, connection);
-                connection.Close();
-                if (!moLoaded)
-                    return null;
-                cache.Add(mObj);
+                return mObj;
             }
-            return mObj;
         }
         /// <summary>
         /// Сохранение метаобъекта
@@ -135,11 +147,15 @@ namespace MetaObjectApp
         /// <param name="mo"></param>
         public void Save(MetaObject mo)
         {
-            if (cache.Contains(mo))
+            lock (this)
             {
-                connection.Open();
-                mo.SaveToDatabase(connection);
-                connection.Close();
+
+                if (cache.Contains(mo))
+                {
+                    connection.Open();
+                    mo.SaveToDatabase(connection);
+                    connection.Close();
+                }
             }
         }   
         /// <summary>
@@ -147,12 +163,15 @@ namespace MetaObjectApp
         /// </summary>
         public void SaveAll()
         {
-            connection.Open();
-            foreach (MetaObject mo in cache)
+            lock (this)
             {
-                mo.SaveToDatabase(connection);
+                connection.Open();
+                foreach (MetaObject mo in cache)
+                {
+                    mo.SaveToDatabase(connection);
+                }
+                connection.Close();
             }
-            connection.Close();
         }
         /// <summary>
         /// Очищает кэш

@@ -6,7 +6,6 @@ using MetaObjectApp;
 using ETLManager;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using ETLManager;
 
 namespace App
 {
@@ -19,19 +18,8 @@ namespace App
             repository =
                 //new MetaObjectRepository("Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=False;MultipleActiveResultSets=True;User ID=a; password=a");
                 new MetaObjectRepository("Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=True;MultipleActiveResultSets=True;");
-            repository.AddFactory(new MetaObjectFactory(repository));
-            repository.AddFactory(new DataSourceFactory(repository));
-            repository.AddFactory(new ReglamentMetaObjectFactory(repository));
-            repository.AddFactory(new ReglamentElementMetaObjectFactory(repository));
-            repository.AddFactory(new TestMetaObjectFactory(repository));
-            repository.AddFactory(new CubeFactory(repository));
-            repository.AddFactory(new CubesFactory(repository));
-            repository.AddFactory(new DataSourceEventFactory(repository));
-            repository.AddFactory(new DataSourceEventsFactory(repository));
-            repository.AddFactory(new DimensionFactory(repository));
-            repository.AddFactory(new ETLFactory(repository));
-            repository.AddFactory(new ETLsFactory(repository));
 
+            initFactories(repository);
             test();
             init();
 
@@ -39,26 +27,6 @@ namespace App
             etlManager.Start();
        
             Console.ReadKey();
-            //DataSource dsss = (DataSource)repository.LoadMetaObject("data4");
-            //DataSource dsObj = (DataSource) repository.CreateNewMetaObject(MetaObjectType.DataSource,"data4");
-            //dsObj.source.Value = "example";
-            //repository.Save(dsObj);
-            //загружаем объект из базы
-            //MetaObject mObj1 = repository.LoadMetaObject(1);
-            //а теперь из кэша
-            //mObj1 = repository.LoadMetaObject(1);
-            //сохраняем
-            //repository.Save(mObj1);
-
-            //сохранения кэша в базу
-            //repository.SaveAll();
-
-
-            //MetaObject mo3= repository.LoadMetaObject(13);
-            //mo3.Identifier = "new";
-            //repository.Save(mo3);
-
-            //repository.SaveAll();
         }
 
         static void test()
@@ -108,39 +76,65 @@ namespace App
             DataSourceEvents dses = repository.CreateOrLoadMetaObject(MetaObjectType.DataSourceEvents,"DataSourceEvents") as DataSourceEvents;
             repository.Save(dses);
             //ETL
-            ETLs etls = repository.CreateOrLoadMetaObject(MetaObjectType.ETLs, "ETLs") as ETLs;
             ETL etl = repository.CreateOrLoadMetaObject(MetaObjectType.ETL, "etl1") as ETL;
-            etl.AssemblyPath=@"D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\1.exe";
+            etl.AssemblyPath = Directory.GetCurrentDirectory() + "\\ETL.exe";
+            //etl.AssemblyPath=@"D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\ETL.exe";
             repository.Save(etl);
-
+            //ETLs
+            ETLs etls = repository.CreateOrLoadMetaObject(MetaObjectType.ETLs, "ETLs") as ETLs;
             etls.AddETL(etl);
-            
             repository.Save(etls);
-            
-
             //источник данных
             DataSource ds = repository.CreateOrLoadMetaObject(MetaObjectType.DataSource, "ds1") as DataSource;
-            ds.DataSourceName="dsname";
+            ds.DataSourceName="Росстат. Население.";
             ds.DataSourceType="type";
             ds.Url="url";
             ds.SetETL(etl);
             repository.Save(ds);
-
             //создаем расписание и задание
-            ReglamentMetaObject rmo = repository.CreateOrLoadMetaObject(MetaObjectType.Reglament, "Reglament") as ReglamentMetaObject;
-            ReglamentElementMetaObject remo = repository.CreateOrLoadMetaObject(MetaObjectType.ReglamentElement, "ReglamentElement"+new Random().Next()) as ReglamentElementMetaObject;
+            ReglamentMetaObject rmo = 
+                repository.CreateOrLoadMetaObject(MetaObjectType.Reglament, "Reglament") as ReglamentMetaObject;
+            ReglamentElementMetaObject remo = 
+                repository.CreateOrLoadMetaObject(MetaObjectType.ReglamentElement, "ReglamentElement"+Guid.NewGuid().ToString()) as ReglamentElementMetaObject;
             rmo.AddReglamentElement(remo);
             remo.Enabled = true;
             remo.ReglamentElementType="ExecETL";
-            remo.NextRunTime = DateTime.Parse("13:14 16.6.2012");
+            remo.NextRunTime = DateTime.Parse("18:37 17.6.2012");
             remo.Period = TimeSpan.FromMinutes(5);
             remo.SetDataSource(ds);
             
             repository.Save(remo);
             repository.Save(rmo);
 
+            //задание проверки источника
+            remo = repository.CreateOrLoadMetaObject(MetaObjectType.ReglamentElement, "ReglamentElement" + Guid.NewGuid().ToString()) as ReglamentElementMetaObject;
+            remo.Enabled = true;
+            remo.ReglamentElementType = "CheckDS";
+            remo.NextRunTime = DateTime.Parse("00:19 18.6.2012");
+            remo.Period = TimeSpan.FromMinutes(3);
+            remo.SetDataSource(ds);
+            repository.Save(remo);
+
+            rmo.AddReglamentElement(remo);
+            repository.Save(rmo);
             
            
+        }
+
+        static void initFactories(MetaObjectRepository repository)
+        {
+            repository.AddFactory(new MetaObjectFactory(repository));
+            repository.AddFactory(new DataSourceFactory(repository));
+            repository.AddFactory(new ReglamentMetaObjectFactory(repository));
+            repository.AddFactory(new ReglamentElementMetaObjectFactory(repository));
+            repository.AddFactory(new TestMetaObjectFactory(repository));
+            repository.AddFactory(new CubeFactory(repository));
+            repository.AddFactory(new CubesFactory(repository));
+            repository.AddFactory(new DataSourceEventFactory(repository));
+            repository.AddFactory(new DataSourceEventsFactory(repository));
+            repository.AddFactory(new DimensionFactory(repository));
+            repository.AddFactory(new ETLFactory(repository));
+            repository.AddFactory(new ETLsFactory(repository));
         }
     }
 }

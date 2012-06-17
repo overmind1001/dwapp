@@ -62,10 +62,12 @@ namespace ETLManager
             if (elementList.Value == null)
                 elementList.Value = new List<int>();
             ((List<int>)elementList.Value).Add((int)dse.Id);
+            elementList.Changed = true;
         }
         public void RemoveDataSourceEvent(DataSourceEvent dse)
         {
             ((List<int>)elementList.Value).Remove((int)dse.Id);
+            elementList.Changed = true;
         }
     }
 }

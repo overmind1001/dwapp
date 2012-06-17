@@ -49,11 +49,15 @@ namespace ETLManager
         {
             if (elementList.Value == null)
                 elementList.Value = new List<int>();
-            ((List<int>)elementList.Value).Add((int)remo.Id);
+            List<int> list =(List<int>) elementList.Value;
+            list.Add((int)remo.Id);
+            elementList.Value = list;
         }
         public void RemoveReglamentElement(ReglamentElementMetaObject remo)
         {
-            ((List<int>)elementList.Value).Remove((int)remo.Id);
+            List<int> list = (List<int>)elementList.Value;
+            list.Remove((int)remo.Id);
+            elementList.Value = list;
         }
     }
 }
