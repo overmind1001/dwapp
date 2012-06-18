@@ -19,7 +19,7 @@ namespace ETLManager
         {
             Dictionary<string, string> pathToETLAndArgs = _eventDecryptor.DecryptEvent(e);
             ProcessStartInfo info = new ProcessStartInfo(pathToETLAndArgs["path"],pathToETLAndArgs["args"]);
-            info.UseShellExecute = false;
+            info.UseShellExecute = true;
             Process p = Process.Start(info);
             Console.WriteLine("Запускаем сборку ETL");
             p.Exited += new EventHandler(p_Exited);

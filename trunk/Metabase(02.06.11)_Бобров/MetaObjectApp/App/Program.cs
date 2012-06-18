@@ -12,12 +12,14 @@ namespace App
     class Program
     {
         static MetaObjectRepository repository;
+        static string connectionString =
+            "Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=True;MultipleActiveResultSets=True;";
 
         static void Main(string[] args)
         {//192.168.189.1
             repository =
                 //new MetaObjectRepository("Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=False;MultipleActiveResultSets=True;User ID=a; password=a");
-                new MetaObjectRepository("Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                new MetaObjectRepository(connectionString);
 
             initFactories(repository);
             test();
@@ -78,6 +80,7 @@ namespace App
             //ETL
             ETL etl = repository.CreateOrLoadMetaObject(MetaObjectType.ETL, "etl1") as ETL;
             etl.AssemblyPath = Directory.GetCurrentDirectory() + "\\ETL.exe";
+            etl.AssemblyArgs = connectionString;
             //etl.AssemblyPath=@"D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\ETL.exe";
             repository.Save(etl);
             //ETLs
@@ -110,7 +113,7 @@ namespace App
             remo = repository.CreateOrLoadMetaObject(MetaObjectType.ReglamentElement, "ReglamentElement" + Guid.NewGuid().ToString()) as ReglamentElementMetaObject;
             remo.Enabled = true;
             remo.ReglamentElementType = "CheckDS";
-            remo.NextRunTime = DateTime.Parse("00:19 18.6.2012");
+            remo.NextRunTime = DateTime.Parse("00:59 19.6.2012");
             remo.Period = TimeSpan.FromMinutes(3);
             remo.SetDataSource(ds);
             repository.Save(remo);

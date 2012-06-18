@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MetaObjectApp;
+using System.Data.SqlClient;
 
 namespace ETLManager
 {
@@ -55,6 +56,40 @@ namespace ETLManager
 
             attributes.Add(name);
             attributes.Add(table);
+        }
+
+        public bool CreateTable()
+        {
+            SqlCommand cmd = new SqlCommand();
+            
+            cmd.CommandText = string.Format("CREATE TABLE [dbo].[{0}](" +
+                                "[id] [bigint] NOT NULL," +
+                                "[value] [nchar](500)," +
+                                "[parent_id] [bigint])", Table);
+            return _repository.ExecuteNonQuery(cmd) > 0;
+            
+        }
+
+        public bool DropTable()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = string.Format("drop TABLE [dbo].[{0}]", Table);
+            return _repository.ExecuteNonQuery(cmd)>0;
+        }
+
+        public void Insert(Dictionary<int, object> data)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            foreach (KeyValuePair<int, object> pair in data)
+            {
+                Console.WriteLine("Insert: {0}, {1}",
+                pair.Key,
+                pair.Value);
+
+                cmd.CommandText = string.Format("insert into [dbo].[{0}] (id,value) values ({1},{2})", Table,pair.Key,pair.Value);
+                int res = _repository.ExecuteNonQuery(cmd);
+            }
         }
     }
 }

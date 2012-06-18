@@ -188,6 +188,22 @@ namespace MetaObjectApp
                 mo = LoadMetaObject(StrIdentifier);
             return mo;
         }
+
+        public int ExecuteNonQuery(SqlCommand cmd)
+        {
+            int res;
+            cmd.Connection = connection;
+            try
+            {
+                connection.Open();
+                res = cmd.ExecuteNonQuery();
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return res;
+        }
         
     }
 }
