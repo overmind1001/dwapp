@@ -58,7 +58,7 @@ namespace ETLManager
 
             AcyncDelegate d = new AcyncDelegate(() => {
                 string newControlSum = dsm.controlSum();
-                if (newControlSum + "3" != dataSource.ControlSum)//контрольная сумма изменилась
+                if (newControlSum  != dataSource.ControlSum)//контрольная сумма изменилась
                 {
                     //сохраняем новую контрольную сумму
                     dataSource.ControlSum = newControlSum;
