@@ -180,7 +180,12 @@ namespace MetaObjectApp
         {
             cache.Clear();
         }
-
+        /// <summary>
+        /// Создание нового либо загрузка существующего метаобъекта.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="StrIdentifier"></param>
+        /// <returns></returns>
         public MetaObject CreateOrLoadMetaObject(MetaObjectType type, string StrIdentifier)
         {
             MetaObject mo = CreateNewMetaObject(type, StrIdentifier);

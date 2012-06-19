@@ -7,15 +7,17 @@ using System.Data.SqlClient;
 
 namespace ETLManager
 {
+    //Метаобъект регламент
     public class ReglamentMetaObject : MetaObject
     {
+        //Поля
         public static new string Type = MetaObjectType.Reglament.ToString();
         private static AttrNameType _ant_attrList = new AttrNameType { Name = "elementList", Type = AttributeType.List };
         public static new List<AttrNameType> Attributes = new List<AttrNameType>() { _ant_attrList};
 
         //Атрибуты
         public MetaObjectApp.Attribute elementList;
-
+        //Конструкторы
         public ReglamentMetaObject(MetaObjectRepository repository)
             : base(repository)
         {
@@ -23,7 +25,7 @@ namespace ETLManager
             elementList = new MetaObjectApp.Attribute(this, _ant_attrList);
             attributes.Add(elementList);
         }
-
+        //методы
         public List<ReglamentElementMetaObject> GetReglamentElements()
         {
             List<int> list = elementList.Value as List<int>;

@@ -7,6 +7,9 @@ using ETLManager;
 
 namespace MetaObjectApp
 {
+    /// <summary>
+    /// Источник данных
+    /// </summary>
     public class DataSource:MetaObject
     {
         //Метаданные
@@ -87,7 +90,7 @@ namespace MetaObjectApp
             }
         }
         
-
+        //Конструктор
         public DataSource(MetaObjectRepository repository)
             :base(repository)
         {
@@ -106,7 +109,7 @@ namespace MetaObjectApp
             attributes.Add(etl_id);
         }
 
-
+        //Методы
         public ETL GetETL()
         {
             ETL etl = _repository.LoadMetaObject(ETL_Id) as ETL;

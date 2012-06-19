@@ -6,13 +6,16 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
+    /// <summary>
+    /// Класс для работы с событиями. 
+    /// </summary>
     class EventManager
     {
         //Поля
-        MetaObjectRepository _repository;
+        MetaObjectRepository _repository;           //ссылка на репозиторий
 
-        EventQueue _eventQueue;
-        DatasourceMonitorManager _datasourceMonitorManager;
+        EventQueue _eventQueue;                                 //очередь
+        DatasourceMonitorManager _datasourceMonitorManager;     //монитор источников
 
         //Конструкторы
         public EventManager(MetaObjectRepository repository)
@@ -23,12 +26,16 @@ namespace ETLManager
             _datasourceMonitorManager.LoadPlugins();
             _datasourceMonitorManager.DS_Changed +=
                             (ev) =>
-                            {//TODO осторожно, может сделать критическую секцию?
+                            {
                                 this._eventQueue.Add(ev);
                             };
         }
 
         //Методы
+        /// <summary>
+        /// Добавляе события в очередь. Отфильтровывает события проверки источников.
+        /// </summary>
+        /// <param name="events"></param>
         public void AddEvents(List<DataSourceEvent> events)
         {
             List<DataSourceEvent> eventsToRemove = new List<DataSourceEvent>();
@@ -52,7 +59,10 @@ namespace ETLManager
             }
             this._eventQueue.AddEvents(events);
         }
-
+        /// <summary>
+        /// Получает первое событие из очереди.
+        /// </summary>
+        /// <returns></returns>
         public DataSourceEvent GetNextEvent()
         {
             if (_eventQueue.Count == 0)

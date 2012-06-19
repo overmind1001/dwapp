@@ -14,7 +14,10 @@ namespace ETLManager
                 this.Add(e);
             }
         }
-
+        /// <summary>
+        /// Выталкивает первый элемент
+        /// </summary>
+        /// <returns></returns>
         public DataSourceEvent PopFirst()
         {
             if (this.Count > 0)

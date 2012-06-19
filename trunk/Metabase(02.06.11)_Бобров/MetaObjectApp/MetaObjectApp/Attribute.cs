@@ -104,12 +104,16 @@ namespace MetaObjectApp
                 id = (long)sr[0];
             }
         }
+        /// <summary>
+        /// Сохранение метаобъекта в репозиторий
+        /// </summary>
+        /// <param name="connection"></param>
         public void Save(SqlConnection connection)
         {
             if (!changed)
                 return;
 
-            //SqlCommand cmd = new SqlCommand("SaveValue metaObj_id=@pmetaobject_id,@attr_id=@patr_id,@value='@pvalue'", connection);
+            
             SqlCommand cmd = new SqlCommand("", connection);
             SqlParameter pValue = new SqlParameter("@pvalue", this.value);
             SqlParameter pMetaobjectId = new SqlParameter("@pmetaobject_id", this.owner.Id);
@@ -150,6 +154,10 @@ namespace MetaObjectApp
            
             changed = false;
         }
+        /// <summary>
+        /// Загрузка метаобъекта из репозитория
+        /// </summary>
+        /// <param name="connection"></param>
         public void Load(SqlConnection connection)
         {
             SqlCommand cmd = new SqlCommand("LoadValue  @metaObj_id=@pmetaobject_id, @attrName=@pattrName", connection);
@@ -163,7 +171,6 @@ namespace MetaObjectApp
             SqlDataReader sdr = cmd.ExecuteReader();
             if (sdr.Read())
             {
-                //this.value = sdr[0].ToString();
                 this.id = (long)sdr[1];
             }
             if (!sdr.HasRows)
@@ -183,11 +190,9 @@ namespace MetaObjectApp
                     this.value = Convert.ToInt64(sdr[0]);
                     break;
                 case AttributeType.List:
-                    
-
                     object o = sdr[0];
                     byte[] buf=(byte[])o;
-                    if (buf.Length == 4)//костыль
+                    if (buf.Length == 4)
                     {
                         this.value = null;
                         break;
@@ -202,16 +207,9 @@ namespace MetaObjectApp
                     {
                         value = null;
                     }
-                   // this.value = (List<int>)sdr[0];///?????????????????????????
                     break;
                 case AttributeType.Binary:
                     this.value = sdr[0];
-                    //byte[] buf;
-                    //MemoryStream ms = new MemoryStream(buf);
-                    //BinaryFormatter bf = new BinaryFormatter();
-                    //bf.Deserialize(
-                    
-
                     break;
             }
         }

@@ -13,12 +13,15 @@ using ETLManager;
 
 namespace ETL
 {
-    class Program
+    /// <summary>
+    /// Класс для загрузки данных из источника в хранилище данных
+    /// </summary>
+    class ETL
     {
-        static MetaObjectRepository repository;
+        static MetaObjectRepository repository;     //ссылка на репозиторий метаданных
 
-        static string url = "http://www.gks.ru/free_doc/new_site/population/demo/demo14.xls";
-        static string file = Directory.GetCurrentDirectory() + @"\demo14.xls";
+        static string url = "http://www.gks.ru/free_doc/new_site/population/demo/demo14.xls";   //адрес источника
+        static string file = Directory.GetCurrentDirectory() + @"\demo14.xls";                  //путь для сохранения файла
 
         public static void ODBC()
         {
@@ -30,13 +33,17 @@ namespace ETL
             oConn.Open();
             table.Load(oCmd.ExecuteReader());
         }
-
+        /// <summary>
+        /// Скачивание xls файла
+        /// </summary>
         public static void Download()
         { 
             WebClient webClient = new WebClient();
             webClient.DownloadFile(new Uri(url), file);
         }
-
+        /// <summary>
+        /// Чтение файла. Преобразование данных к многомерному виду. Загрузка данных в ХД.
+        /// </summary>
         public static void ReadFile()
         {
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0; Data Source="+file+";   Extended Properties=Excel 12.0 xml";
@@ -245,7 +252,9 @@ namespace ETL
             //}
             connection.Close();
         }
-
+        /// <summary>
+        /// Удаление фалйа
+        /// </summary>
         public static void DeleteFile()
         {
             File.Delete(file);
@@ -253,16 +262,12 @@ namespace ETL
 
         static void Main(string[] args)
         {
-            string connectionString="";// = "Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=True;MultipleActiveResultSets=True;"; //args[0];
-            //connectionString = args[0];
-
+            string connectionString="";
             Console.WriteLine("Говорит сборка етл");
-            
             foreach (string s in args)
             {
                 connectionString += s + " ";
             }
-
             repository = new MetaObjectRepository(connectionString);
 
             Console.WriteLine("Началась загрузка файла. {0}", DateTime.Now);
@@ -277,7 +282,7 @@ namespace ETL
     }
 }
 
-
+//запрос к кубу
 //select  distinct
 
 //dbo.Годы.value as Годы,

@@ -8,6 +8,9 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
+    /// <summary>
+    /// Класс для запуска ETL и проверки источников данных по расписанию
+    /// </summary>
     public class ETLManager
     {
         //Поля
@@ -15,9 +18,9 @@ namespace ETLManager
         EventManager        _eventManager;
         ETLExecuteManager   _etlExecuteManager;
 
-        bool    _isRunning;          //признак того, что менеджер уже работает
+        bool    _isRunning;                 //признак того, что менеджер уже работает
         MetaObjectRepository _repository;   //ссылка на репозиторий
-        Thread  _thread;             //поток управления. В этом потоке выполняется чтение регламента, проброска событий, запуск на выполнение ETL-сборок.
+        Thread  _thread;                    //поток управления. В этом потоке выполняется чтение регламента, проброска событий, запуск на выполнение ETL-сборок.
 
         //Свойства
         bool    IsRunning

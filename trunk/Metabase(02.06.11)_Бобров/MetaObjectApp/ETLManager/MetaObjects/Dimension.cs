@@ -7,8 +7,12 @@ using System.Data.SqlClient;
 
 namespace ETLManager
 {
+    /// <summary>
+    /// Метаобъект измерение
+    /// </summary>
     public class Dimension : MetaObject
     {
+        //Поля
         public static new string Type = MetaObjectType.Dimension.ToString();
 
         private static AttrNameType _ant_attrName = new AttrNameType { Name = "name", Type = AttributeType.String };
@@ -45,7 +49,7 @@ namespace ETLManager
                 table.Value = value;
             }
         }
-
+        //Конструкторы
         public Dimension(MetaObjectRepository repository)
             : base(repository)
         {
@@ -57,7 +61,11 @@ namespace ETLManager
             attributes.Add(name);
             attributes.Add(table);
         }
-
+        //Методы
+        /// <summary>
+        /// Создание таблицы справочника.
+        /// </summary>
+        /// <returns></returns>
         public bool CreateTable()
         {
             SqlCommand cmd = new SqlCommand();
@@ -69,14 +77,20 @@ namespace ETLManager
             return _repository.ExecuteNonQuery(cmd) > 0;
             
         }
-
+        /// <summary>
+        /// Удаление таблицы справочника
+        /// </summary>
+        /// <returns></returns>
         public bool DropTable()
         {
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = string.Format("drop TABLE [dbo].[{0}]", Table);
             return _repository.ExecuteNonQuery(cmd)>0;
         }
-
+        /// <summary>
+        /// Заполнение таблицы справочника
+        /// </summary>
+        /// <param name="data"></param>
         public void Insert(Dictionary<int, object> data)
         {
             SqlCommand cmd = new SqlCommand();
