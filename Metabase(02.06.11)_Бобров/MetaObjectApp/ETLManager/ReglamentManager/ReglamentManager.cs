@@ -6,6 +6,9 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
+    /// <summary>
+    /// Класс, отвечающиц за работу с регламентом
+    /// </summary>
     class ReglamentManager
     {
         //Поля

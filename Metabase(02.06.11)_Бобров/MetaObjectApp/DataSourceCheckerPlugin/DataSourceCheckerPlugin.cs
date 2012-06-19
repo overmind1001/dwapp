@@ -12,17 +12,24 @@ namespace DataSourceCheckerPlugin
     public class DataSourceCheckerPlugin : IDatasourceMonitor
     {
         #region Члены IDatasourceMonitor
-
+        /// <summary>
+        /// Имя плагина
+        /// </summary>
         public string Name
         {
             get { return "DataSourceCheckerPlugin"; }
         }
-
+        /// <summary>
+        /// Имя источника данных
+        /// </summary>
         public string DataSourceName
         {
             get { return "Росстат. Население."; }
         }
-
+        /// <summary>
+        /// Метод для вычисления контрольной суммы по данным источника
+        /// </summary>
+        /// <returns>Контрольная сумма</returns>
         public string controlSum()
         {
             Console.WriteLine("\nПроверка источника...");
@@ -38,7 +45,9 @@ namespace DataSourceCheckerPlugin
         static string url = "http://www.gks.ru/free_doc/new_site/population/demo/demo14.xls";
         static string file = Directory.GetCurrentDirectory() + @"\demo14.xls";
 
-
+        /// <summary>
+        /// Скачивание xls файла
+        /// </summary>
         public static void Download()
         {
             WebClient webClient = new WebClient();
@@ -64,7 +73,6 @@ namespace DataSourceCheckerPlugin
                 {
                     try
                     {
-
                         s += Convert.ToInt32(dr[i]);
                     }
                     catch { }
@@ -73,7 +81,9 @@ namespace DataSourceCheckerPlugin
             connection.Close();
             return s.ToString();
         }
-
+        /// <summary>
+        /// Удаляет файл
+        /// </summary>
         public static void DeleteFile()
         {
             File.Delete(file);

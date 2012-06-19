@@ -16,10 +16,8 @@ namespace App
             "Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=True;MultipleActiveResultSets=True;";
 
         static void Main(string[] args)
-        {//192.168.189.1
-            repository =
-                //new MetaObjectRepository("Data Source=localhost;Initial Catalog=MetaBase;connection timeout=15;Trusted_Connection=False;MultipleActiveResultSets=True;User ID=a; password=a");
-                new MetaObjectRepository(connectionString);
+        {
+            repository = new MetaObjectRepository(connectionString);
 
             initFactories(repository);
             test();
@@ -30,7 +28,9 @@ namespace App
        
             Console.ReadKey();
         }
-
+        /// <summary>
+        /// Создание тестового объекта
+        /// </summary>
         static void test()
         {
             //создаем объект
@@ -71,7 +71,9 @@ namespace App
             else
                 Console.WriteLine("Не удалось подключиться");
         }
-
+        /// <summary>
+        /// Инициализация хранилища
+        /// </summary>
         static void init()
         {
             //события
@@ -81,7 +83,6 @@ namespace App
             ETL etl = repository.CreateOrLoadMetaObject(MetaObjectType.ETL, "etl1") as ETL;
             etl.AssemblyPath = Directory.GetCurrentDirectory() + "\\ETL.exe";
             etl.AssemblyArgs = connectionString;
-            //etl.AssemblyPath=@"D:\Универ\4 курс\2 семестр\Выпускная работа бакалавра\Metabase(02.06.11)_Бобров\Metabase(02.06.11)_Бобров\ETL.exe";
             repository.Save(etl);
             //ETLs
             ETLs etls = repository.CreateOrLoadMetaObject(MetaObjectType.ETLs, "ETLs") as ETLs;
@@ -120,10 +121,11 @@ namespace App
 
             rmo.AddReglamentElement(remo);
             repository.Save(rmo);
-            
-           
         }
-
+        /// <summary>
+        /// Инициализация фабрик
+        /// </summary>
+        /// <param name="repository"></param>
         static void initFactories(MetaObjectRepository repository)
         {
             repository.AddFactory(new MetaObjectFactory(repository));

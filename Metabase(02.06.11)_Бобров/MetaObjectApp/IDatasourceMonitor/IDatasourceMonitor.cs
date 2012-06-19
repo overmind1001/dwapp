@@ -10,11 +10,8 @@ namespace IDatasourceMonitorNS
     /// </summary>
     public interface IDatasourceMonitor
     {
-        string Name { get; } //Имя плагина
-        string DataSourceName { get; }
-
-        string controlSum();
-        
-
+        string Name { get; }            //Имя плагина
+        string DataSourceName { get; }  //Название источника данных
+        string controlSum();            //Вычисление контрольной суммы
     }
 }

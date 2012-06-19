@@ -6,6 +6,9 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
+    /// <summary>
+    /// Класс для генерации события по элементам регламента
+    /// </summary>
     class EventGenerator
     {
         //Поля
@@ -15,7 +18,7 @@ namespace ETLManager
         {
             _repository = repository;
         }
-
+        //методы
         /// <summary>
         /// Генерирует события по регламенту
         /// </summary>

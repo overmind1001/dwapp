@@ -8,6 +8,7 @@ namespace ETLManager
 {
     public class DataSourceEvent : MetaObject
     {
+        //Поля
         public static new string Type = MetaObjectType.DataSourceEvent.ToString();
         private static AttrNameType _ant_attrEventType = new AttrNameType { Name = "eventType", Type = AttributeType.String };
         private static AttrNameType _ant_attrDataSourceId = new AttrNameType { Name = "dataSourceId", Type = AttributeType.Id };
@@ -43,7 +44,7 @@ namespace ETLManager
                 dataSourceId.Value = value;
             }
         }
-
+        //Конструкторы
         public DataSourceEvent(MetaObjectRepository repository)
             : base(repository)
         {
@@ -54,7 +55,7 @@ namespace ETLManager
             attributes.Add(eventType);
             attributes.Add(dataSourceId);
         }
-
+        //Методы
         public DataSource GetDataSource()
         {
             DataSource ds = _repository.LoadMetaObject(DataSourceId) as DataSource;

@@ -6,8 +6,17 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
+    /// <summary>
+    /// Класс для расшифровки событий.
+    /// </summary>
     class EventDecryptor
     {
+        //Методы
+        /// <summary>
+        /// Метод для расшифровки сообщения.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public Dictionary<string,string> DecryptEvent(DataSourceEvent e)
         {
             //получить событие, узнать про датасорс и етл

@@ -6,8 +6,12 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
+    /// <summary>
+    /// Метаобъект элемент регламента
+    /// </summary>
     public class ReglamentElementMetaObject : MetaObject
     {
+        //поля
         public static new string Type = MetaObjectType.ReglamentElement.ToString();
         private static AttrNameType _ant_attrEnabled = new AttrNameType { Name = "enabled", Type = AttributeType.Bigint };
         private static AttrNameType _ant_attrDataSourceLink = new AttrNameType { Name = "dataSourceId", Type = AttributeType.Id };
@@ -107,7 +111,7 @@ namespace ETLManager
             }
         }
 
-
+        //Конструкторы
         public ReglamentElementMetaObject(MetaObjectRepository repository)
             : base(repository)
         {
@@ -127,7 +131,7 @@ namespace ETLManager
             attributes.Add(nextRunTime);
             attributes.Add(type);
         }
-
+        //методы
         public DataSource getDataSource()
         {
             DataSource ds = _repository.LoadMetaObject((int)DataSourceId) as DataSource;

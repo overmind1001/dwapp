@@ -6,12 +6,13 @@ using MetaObjectApp;
 
 namespace ETLManager
 {
+    /// <summary>
+    /// Класс для чтения регламента
+    /// </summary>
     public class ReglamentReader
     {
         //Поля
         MetaObjectRepository _repository;
-
-
 
         //Конструкторы
         public ReglamentReader(MetaObjectRepository repository)
@@ -19,7 +20,7 @@ namespace ETLManager
             _repository = repository;
         }
 
-
+        //методы
         /// <summary>
         /// Получает список элементов регламента, которые к текщему моменту "сработали"
         /// </summary>

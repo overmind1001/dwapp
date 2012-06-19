@@ -6,7 +6,10 @@ using MetaObjectApp;
 using System.Data.SqlClient;
 
 namespace ETLManager
-{//?????????????????????????????????????????? список показателей, впособы агрегации в измерениях
+{   
+    /// <summary>
+    /// Метаобъект Куб. Для поддержки многомероной модели данных.
+    /// </summary>
     public class Cube : MetaObject
     {
         public static new string Type = MetaObjectType.Cube.ToString();
@@ -73,7 +76,7 @@ namespace ETLManager
                 способыАгрегацииНаИзмерения.Value = value;
             }
         }
-
+        //Конструкторы
         public Cube(MetaObjectRepository repository)
             : base(repository)
         {
@@ -89,7 +92,7 @@ namespace ETLManager
             attributes.Add(списокПоказателей);
             attributes.Add(способыАгрегацииНаИзмерения);
         }
-
+        //Методы
         List<Dimension> GetDimensions()
         {
             List<int> list = dimensionsList.Value as List<int>;
@@ -132,7 +135,10 @@ namespace ETLManager
                 return 0;
             return list.Count;
         }
-
+        /// <summary>
+        /// Создает таблицу фактов
+        /// </summary>
+        /// <returns></returns>
         public bool CreateFactsTable()
         {
             List<Dimension> dimList = GetDimensions();
@@ -151,7 +157,10 @@ namespace ETLManager
                                 "[value] [nchar](500))", CubeName);
             return _repository.ExecuteNonQuery(cmd) > 0;
         }
-
+        /// <summary>
+        /// Заполняет таблицу фактов
+        /// </summary>
+        /// <param name="data"></param>
         public void Insert(List<Dictionary<string,object>> data)
         {
             SqlCommand cmd = new SqlCommand();
@@ -183,7 +192,10 @@ namespace ETLManager
                 int res = _repository.ExecuteNonQuery(cmd);
             }
         }
-
+        /// <summary>
+        /// Возвращает названия полей таблицы фактов
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetFactTableListFields()
         {
             List<string> res = new List<string>();
