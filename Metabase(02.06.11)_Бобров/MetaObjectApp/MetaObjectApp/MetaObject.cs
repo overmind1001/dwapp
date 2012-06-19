@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 
@@ -11,8 +10,8 @@ namespace MetaObjectApp
     /// </summary>
     public class MetaObject
     {
-        protected long id;          //идентификатор метаобъекта
-        protected MetaObjectRepository _repository;
+        protected long id;                              //идентификатор метаобъекта
+        protected MetaObjectRepository _repository;     //ссылка на репозиторий
 
         //статические члены
         public static List<AttrNameType> Attributes = new List<AttrNameType>(); //список названий атрибутов. (метаданные)
@@ -60,7 +59,7 @@ namespace MetaObjectApp
             }
         }
         /// <summary>
-        /// Загрузка из базы
+        /// Загрузка метаобъекта из базы
         /// </summary>
         /// <param name="id"></param>
         /// <param name="connection"></param>
@@ -84,6 +83,12 @@ namespace MetaObjectApp
             else
                 return false;
         }
+        /// <summary>
+        /// Загрузка метаобъекта из репозитория по строковому идентификатору
+        /// </summary>
+        /// <param name="strIdentifier"></param>
+        /// <param name="connection"></param>
+        /// <returns></returns>
         public virtual bool LoadFromDatabase(string strIdentifier, SqlConnection connection)
         {
             SqlCommand cmd = new SqlCommand("SELECT * FROM TMetaObjects m WHERE m.stridentifier=@strIdentifier", connection);

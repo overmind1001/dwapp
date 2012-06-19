@@ -6,12 +6,18 @@ using System.Data.SqlClient;
 
 namespace MetaObjectApp
 {
+    /// <summary>
+    /// фабрика для инстанцирования объектов класса MetaObject
+    /// </summary>
     public class MetaObjectFactory
     {
         //поля
         protected MetaObjectRepository _repository;
 
         //свойства
+        /// <summary>
+        /// Название инстанцируемого метаобъекта
+        /// </summary>
         public virtual string Name
         {
             get
@@ -19,6 +25,9 @@ namespace MetaObjectApp
                 return MetaObject.Type; 
             }
         }
+        /// <summary>
+        /// Список атрибутов инстанцируемого метаобъекта
+        /// </summary>
         public virtual List<AttrNameType> Attributes
         {
             get
@@ -80,6 +89,5 @@ namespace MetaObjectApp
             cmd.Parameters.Add(ptypeName);
             cmd.ExecuteNonQuery();
         }
-
     }
 }
