@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Threading;
@@ -27,7 +26,7 @@ namespace MetaObjectApp
         //методы
 
         /// <summary>
-        /// Добавить фабрику
+        /// Добавляет фабрику
         /// </summary>
         /// <param name="factory"></param>
         public void AddFactory(MetaObjectFactory factory)
@@ -38,7 +37,7 @@ namespace MetaObjectApp
             connection.Close();
         }
         /// <summary>
-        /// Создание нового метаобъекта
+        /// Создание нового метаобъекта заданного типа
         /// </summary>
         /// <param name="name">имя типа</param>
         /// <returns></returns>
@@ -193,7 +192,11 @@ namespace MetaObjectApp
                 mo = LoadMetaObject(StrIdentifier);
             return mo;
         }
-
+        /// <summary>
+        /// Выполнение sql-запроса
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
         public int ExecuteNonQuery(SqlCommand cmd)
         {
             int res;
